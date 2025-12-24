@@ -5,7 +5,6 @@ import Services from './components/Services';
 import About from './components/About';
 import News from './components/News';
 import Contact from './components/Contact';
-import Footer from './components/Footer';
 
 function App() {
   const [cursorPos, setCursorPos] = useState({ x: 0, y: 0 });
@@ -13,7 +12,6 @@ function App() {
 
   useEffect(() => {
     const moveCursor = (e: MouseEvent) => {
-      // Use requestAnimationFrame for smoother cursor performance
       requestAnimationFrame(() => {
         setCursorPos({ x: e.clientX, y: e.clientY });
       });
@@ -39,19 +37,17 @@ function App() {
 
   return (
     <div className="bg-bg text-text min-h-screen relative selection:bg-acid selection:text-black">
-      {/* Grain Overlay (CSS based in index.html) */}
       <div className="grain"></div>
 
-      {/* Custom Cursor */}
-      <div 
+      <div
         className="fixed top-0 left-0 w-3 h-3 bg-acid rounded-full pointer-events-none z-[100] mix-blend-exclusion transition-transform duration-150 ease-out will-change-transform"
-        style={{ 
+        style={{
           transform: `translate(${cursorPos.x - 6}px, ${cursorPos.y - 6}px) scale(${isHovering ? 5 : 1})`,
         }}
       />
-      <div 
+      <div
          className="fixed top-0 left-0 w-10 h-10 border border-white/30 rounded-full pointer-events-none z-[99] transition-transform duration-300 ease-out will-change-transform"
-         style={{ 
+         style={{
           transform: `translate(${cursorPos.x - 20}px, ${cursorPos.y - 20}px) scale(${isHovering ? 1.5 : 1})`,
         }}
       />
@@ -64,7 +60,6 @@ function App() {
         <News />
         <Contact />
       </main>
-      <Footer />
     </div>
   );
 }

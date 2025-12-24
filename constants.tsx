@@ -9,11 +9,11 @@ export const COMPANY_INFO: CompanyInfo = {
 };
 
 export const NAV_ITEMS: NavItem[] = [
-  { label: 'ホーム', href: '#hero' },
-  { label: 'サービス', href: '#services' },
-  { label: '私たちについて', href: '#about' },
-  { label: 'ニュース', href: '#news' },
-  { label: 'お問い合わせ', href: '#contact' },
+  { label: 'Home', href: '/' },
+  { label: 'Services', href: '/services' },
+  { label: 'Company', href: '/company' },
+  { label: 'News', href: '/#news' },
+  { label: 'Contact', href: '/#contact' },
 ];
 
 export const SERVICES: ServiceItem[] = [

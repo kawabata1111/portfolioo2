@@ -71,6 +71,13 @@
         text-orientation: upright;
       }
 
+      @media (min-width: 1024px) {
+        .btn-vertical {
+          transform: rotate(180deg);
+          writing-mode: vertical-rl;
+        }
+      }
+
       .text-outline {
         -webkit-text-stroke: 1px rgba(255,255,255,0.3);
         color: transparent;
@@ -125,5 +132,6 @@
 </head>
   <body>
     <div id="root"></div>
+    <script type="module" src="/index.tsx"></script>
   </body>
 </html>
