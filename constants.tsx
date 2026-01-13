@@ -12,11 +12,11 @@ export const COMPANY_INFO: CompanyInfo = {
 };
 
 export const NAV_ITEMS: NavItem[] = [
-  { label: 'Home', href: '/#hero' },
-  { label: 'Services', href: '/#services' },
-  { label: 'About', href: '/#about' },
-  { label: 'News', href: '/#news' },
-  { label: 'Contact', href: '/#contact' },
+  { label: 'Home', href: '/' },
+  { label: 'Services', href: '/services.html' },
+  { label: 'About', href: '/about.html' },
+  { label: 'News', href: '/news.html' },
+  { label: 'Contact', href: '/contact.html' },
 ];
 
 export const SERVICES: ServiceItem[] = [
