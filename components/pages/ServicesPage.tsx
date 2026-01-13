@@ -24,7 +24,7 @@ const ServicesPage: React.FC = () => {
           </div>
 
           {/* Service 01: 研修事業 */}
-          <section className="mb-24 sm:mb-32">
+          <section id="training" className="mb-24 sm:mb-32 scroll-mt-32">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-start">
               <div>
                 <div className="flex items-center gap-4 mb-6">
@@ -81,7 +81,7 @@ const ServicesPage: React.FC = () => {
           <div className="border-t border-white/10 mb-24 sm:mb-32"></div>
 
           {/* Service 02: スマホ関連グッズ卸売業 */}
-          <section className="mb-24 sm:mb-32">
+          <section id="wholesale" className="mb-24 sm:mb-32 scroll-mt-32">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-start">
               <div className="lg:order-2">
                 <div className="flex items-center gap-4 mb-6">
@@ -138,7 +138,7 @@ const ServicesPage: React.FC = () => {
           <div className="border-t border-white/10 mb-24 sm:mb-32"></div>
 
           {/* Service 03: Amazon物販 */}
-          <section className="mb-24 sm:mb-32">
+          <section id="ecommerce" className="mb-24 sm:mb-32 scroll-mt-32">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-start">
               <div>
                 <div className="flex items-center gap-4 mb-6">

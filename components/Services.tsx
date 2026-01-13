@@ -5,6 +5,15 @@ import { ArrowUpRight } from 'lucide-react';
 const Services: React.FC = () => {
   const [activeId, setActiveId] = useState<string | null>(null);
 
+  const getServiceLink = (id: string) => {
+    const links: { [key: string]: string } = {
+      '1': '/services.html#training',
+      '2': '/services.html#wholesale',
+      '3': '/services.html#ecommerce',
+    };
+    return links[id] || '/services.html';
+  };
+
   return (
     <section id="services" className="py-16 sm:py-24 md:py-32 bg-bg relative z-20">
       <div className="container mx-auto px-4 sm:px-6 md:px-12">
@@ -20,8 +29,9 @@ const Services: React.FC = () => {
 
         <div className="flex flex-col">
           {SERVICES.map((service, index) => (
-            <div
+            <a
               key={service.id}
+              href={getServiceLink(service.id)}
               className="group relative border-b border-white/10 last:border-b-0 transition-all duration-500 block cursor-pointer"
               onMouseEnter={() => setActiveId(service.id)}
               onMouseLeave={() => setActiveId(null)}
@@ -73,7 +83,7 @@ const Services: React.FC = () => {
                 </div>
 
               </div>
-            </div>
+            </a>
           ))}
         </div>
       </div>
