@@ -42,8 +42,8 @@ const Hero: React.FC = () => {
           {/* Top Left: Japanese Vertical Copy - Desktop only */}
           <div className="hidden lg:flex col-span-2 justify-center items-start pt-32">
              <div className="writing-vertical-rl text-lg xl:text-xl font-serif font-medium tracking-[0.3em] text-white/80 h-auto border-r border-white/10 pr-6">
-                <span className="animate-[fadeIn_1s_ease-out_1s_forwards] opacity-0">不確実な未来を、</span>
-                <span className="mt-8 text-acid animate-[fadeIn_1s_ease-out_1.2s_forwards] opacity-0">確信に変える。</span>
+                <span className="animate-[fadeIn_1s_ease-out_1s_forwards] opacity-0">多角的な事業で、</span>
+                <span className="mt-8 text-acid animate-[fadeIn_1s_ease-out_1.2s_forwards] opacity-0">価値を創造する。</span>
              </div>
           </div>
 
@@ -59,21 +59,21 @@ const Hero: React.FC = () => {
 
              <div className="relative text-center md:text-left">
                 <h1 className="text-4xl sm:text-5xl md:text-7xl lg:text-[9vw] leading-[0.85] font-display font-black tracking-tighter text-white uppercase mix-blend-difference z-20">
-                  <span className="block hover:text-acid transition-colors duration-500 cursor-default">Digital</span>
-                  <span className="block ml-4 sm:ml-8 md:ml-20 lg:ml-32 hover:text-acid transition-colors duration-500 cursor-default">Alchemy</span>
+                  <span className="block hover:text-acid transition-colors duration-500 cursor-default">T.SCREEN</span>
+                  <span className="block ml-4 sm:ml-8 md:ml-20 lg:ml-32 hover:text-acid transition-colors duration-500 cursor-default">Solutions</span>
                 </h1>
 
                 {/* Mobile Japanese Text */}
                 <p className="lg:hidden mt-6 md:mt-8 text-base sm:text-lg font-serif text-white/90 leading-loose">
-                  不確実な未来を、<br/>
-                  技術で<span className="text-acid">「確信」</span>に変える。
+                  多角的な事業で、<br/>
+                  <span className="text-acid">「価値」</span>を創造する。
                 </p>
              </div>
 
              <div className="mt-8 md:mt-16 md:ml-20 lg:ml-32 max-w-md px-4 md:px-0">
                <p className="text-xs sm:text-sm md:text-base text-muted font-mono leading-relaxed border-l border-acid/50 pl-4">
-                 // SYSTEM_READY<br/>
-                 NovaSphere transforms business chaos into streamlined certainty through advanced AI and cloud engineering.
+                 // T.SCREEN<br/>
+                 研修事業・スマホ関連グッズ卸売・Amazon物販で、お客様のビジネスをサポートします。
                </p>
              </div>
           </div>

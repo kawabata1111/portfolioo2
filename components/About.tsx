@@ -7,7 +7,7 @@ const About: React.FC = () => {
       {/* Background Typography */}
       <div className="absolute top-0 left-0 w-full overflow-hidden pointer-events-none opacity-5">
         <span className="text-[15vw] sm:text-[20vw] font-display font-black leading-none text-white whitespace-nowrap">
-          NOVA SPHERE
+          T.SCREEN
         </span>
       </div>
 
@@ -19,24 +19,22 @@ const About: React.FC = () => {
             <div className="flex items-start gap-3 sm:gap-4 mb-8 sm:mb-12">
                <span className="w-px h-16 sm:h-20 bg-acid block flex-shrink-0"></span>
                <div>
-                  <span className="text-acid font-mono text-xs tracking-widest uppercase mb-3 sm:mb-4 block">Our Philosophy</span>
+                  <span className="text-acid font-mono text-xs tracking-widest uppercase mb-3 sm:mb-4 block">About Us</span>
                   <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold leading-tight font-sans">
-                    常識を疑い、<br/>
-                    <span className="text-white">最適解</span>を再定義する。
+                    多角的な事業で、<br/>
+                    <span className="text-white">価値</span>を創造する。
                   </h2>
                </div>
             </div>
 
             <div className="space-y-6 sm:space-y-8 text-white/70 leading-relaxed sm:leading-loose text-sm sm:text-base md:text-lg font-light">
               <p>
-                NovaSphere（ノヴァスフィア）は、2018年に東京・六本木で設立されたテック・ブティックです。
-                大手SIer出身のエンジニアと、芸術領域のデザイナーが融合することで生まれました。
+                株式会社T.SCREENは、令和5年6月に大阪で設立されました。
+                研修事業、スマホ関連グッズ卸売業、Amazon物販の3つの事業を柱に、幅広いビジネスを展開しています。
               </p>
               <p>
-                私たちは「動けばいい」システムを作りません。
-                使う人の心が躍り、ビジネスの成長速度を劇的に変える「体験」を創り出します。
-                AIによる自動化、堅牢なクラウドインフラ、そして心を揺さぶるUI/UX。
-                これらを高い次元で融合させることが、私たちの使命です。
+                お客様のニーズに寄り添い、質の高いサービスと商品を提供することで、
+                信頼されるビジネスパートナーとして成長し続けることを目指しています。
               </p>
             </div>
 
@@ -59,11 +57,10 @@ const About: React.FC = () => {
                </div>
             </div>
 
-            <div className="grid grid-cols-3 lg:grid-cols-1 gap-4 sm:gap-8 lg:gap-12 border-t border-white/10 pt-8 sm:pt-12">
+            <div className="grid grid-cols-2 lg:grid-cols-1 gap-4 sm:gap-8 lg:gap-12 border-t border-white/10 pt-8 sm:pt-12">
               {[
-                { label: 'ESTABLISHED', value: '2018' },
-                { label: 'PROJECTS', value: '150+' },
-                { label: 'MEMBERS', value: '45' },
+                { label: 'ESTABLISHED', value: '2023' },
+                { label: 'BUSINESS', value: '3' },
               ].map((stat) => (
                  <div key={stat.label} className="group flex flex-col lg:flex-row lg:items-end lg:justify-between border-b border-white/10 pb-3 sm:pb-4">
                     <span className="font-mono text-[10px] sm:text-xs text-acid mb-1 group-hover:lg:translate-x-2 transition-transform">{stat.label}</span>
@@ -74,7 +71,7 @@ const About: React.FC = () => {
 
              <div className="mt-8 sm:mt-12">
                <span className="block text-xs font-mono text-white/40 mb-2">LOCATION</span>
-               <p className="text-base sm:text-lg font-bold">Roppongi Grand Tower 45F,<br/>Tokyo, Japan</p>
+               <p className="text-base sm:text-lg font-bold">大阪市東成区大今里,<br/>Osaka, Japan</p>
              </div>
           </div>
 

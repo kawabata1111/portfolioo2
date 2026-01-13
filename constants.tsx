@@ -1,11 +1,14 @@
-import { Brain, Cpu, Globe, Rocket, Shield, LineChart } from 'lucide-react';
+import { GraduationCap, Smartphone, ShoppingCart } from 'lucide-react';
 import { ServiceItem, NewsItem, CompanyInfo, NavItem } from './types';
 
 export const COMPANY_INFO: CompanyInfo = {
-  name: "NovaSphere Solutions",
-  address: "東京都港区六本木 1-1-1 グランドタワー 45F",
-  founded: "2018年4月",
-  ceo: "神宮寺 健",
+  name: "株式会社T.SCREEN",
+  address: "大阪府大阪市東成区大今里3-26-26-902",
+  founded: "令和5年6月30日",
+  ceo: "代表取締役 田中 敦史",
+  phone: "080-1518-7880",
+  email: "t.screen0121@gmail.com",
+  employees: "1名",
 };
 
 export const NAV_ITEMS: NavItem[] = [
@@ -19,75 +22,55 @@ export const NAV_ITEMS: NavItem[] = [
 export const SERVICES: ServiceItem[] = [
   {
     id: '1',
-    title: 'AI トランスフォーメーション',
-    description: '最先端の生成AI技術を活用し、ビジネスプロセスを根本から再構築。業務効率化と新たな価値創造を実現します。',
-    icon: Brain
+    title: '研修事業',
+    description: 'ビジネススキル向上のための各種研修プログラムを提供。実践的なカリキュラムで人材育成をサポートします。',
+    icon: GraduationCap
   },
   {
     id: '2',
-    title: 'クラウドネイティブ開発',
-    description: 'スケーラビリティと堅牢性を兼ね備えたクラウドインフラの設計・構築。AWS/GCP/Azureに対応。',
-    icon: Globe
+    title: 'スマホ関連グッズ卸売業',
+    description: 'スマートフォンケース、保護フィルム、アクセサリーなど、スマホ関連グッズの卸売を行っています。',
+    icon: Smartphone
   },
   {
     id: '3',
-    title: 'データドリブン経営支援',
-    description: '社内外の膨大なデータを統合・分析。経営判断の迅速化と精度向上をサポートするダッシュボードを構築。',
-    icon: LineChart
-  },
-  {
-    id: '4',
-    title: '次世代セキュリティ',
-    description: 'ゼロトラストアーキテクチャに基づいた強固なセキュリティ対策で、企業のデジタル資産を守り抜きます。',
-    icon: Shield
-  },
-  {
-    id: '5',
-    title: 'IoT ソリューション',
-    description: '物理世界のデータをデジタル化し、リアルタイムでのモニタリングと制御を実現するスマートファクトリー化を支援。',
-    icon: Cpu
-  },
-  {
-    id: '6',
-    title: 'DX コンサルティング',
-    description: '単なるツール導入ではなく、企業文化や組織構造まで踏み込んだ本質的なデジタルトランスフォーメーションを伴走支援。',
-    icon: Rocket
+    title: 'Amazon物販',
+    description: 'Amazonマーケットプレイスを活用した物販事業を展開。豊富な商品ラインナップでお客様のニーズにお応えします。',
+    icon: ShoppingCart
   }
 ];
 
 export const NEWS: NewsItem[] = [
   {
     id: '1',
-    date: '2024.05.20',
-    category: 'PRESS',
-    title: '次世代生成AI活用プラットフォーム「NovaGen」のベータ版提供を開始'
+    date: '2023.06.30',
+    category: 'INFO',
+    title: '株式会社T.SCREENを設立しました'
   },
   {
     id: '2',
-    date: '2024.04.15',
-    category: 'EVENT',
-    title: '「Global Tech Summit 2024」に弊社代表の神宮寺が登壇します'
+    date: '2023.07.01',
+    category: 'SERVICE',
+    title: '研修事業・スマホ関連グッズ卸売業を開始しました'
   },
   {
     id: '3',
-    date: '2024.03.01',
-    category: 'RECRUIT',
-    title: '2025年度新卒採用のエントリー受付を開始しました'
+    date: '2023.08.01',
+    category: 'SERVICE',
+    title: 'Amazon物販事業を開始しました'
   }
 ];
 
-export const AI_CONTEXT = `あなたはNovaSphere SolutionsのAIアシスタントです。
-NovaSphere Solutionsは、最先端のAI技術と確かなエンジニアリングで企業のDXを加速させるテックパートナーです。
-設立は2018年4月、代表取締役CEOは神宮寺 健、住所は東京都港区六本木 1-1-1 グランドタワー 45Fです。
+export const AI_CONTEXT = `あなたは株式会社T.SCREENのAIアシスタントです。
+株式会社T.SCREENは、研修事業、スマホ関連グッズ卸売業、Amazon物販を展開する企業です。
+設立は令和5年6月30日、代表取締役は田中 敦史、所在地は大阪府大阪市東成区大今里3-26-26-902です。
+電話番号は080-1518-7880、メールアドレスはt.screen0121@gmail.comです。
 
-以下のサービスを提供しています：
-1. AI トランスフォーメーション (ビジネスプロセスの再構築)
-2. クラウドネイティブ開発 (AWS/GCP/Azure)
-3. データドリブン経営支援 (データ統合・分析)
-4. 次世代セキュリティ (ゼロトラスト)
-5. IoT ソリューション (スマートファクトリー)
-6. DX コンサルティング (組織変革支援)
+以下の事業を展開しています：
+1. 研修事業（ビジネススキル向上のための研修プログラム）
+2. スマホ関連グッズ卸売業（スマホケース、保護フィルム、アクセサリー等）
+3. Amazon物販（Amazonマーケットプレイスでの販売事業）
 
-広報担当として、Webサイト訪問者からの質問に礼儀正しく、専門的に回答してください。
-具体的な開発費用や見積もりについては、プロジェクトの規模や要件によると伝え、お問い合わせフォームからの連絡を推奨してください。
+広報担当として、Webサイト訪問者からの質問に礼儀正しく、丁寧に回答してください。
+詳細なお問い合わせについては、お問い合わせフォームからの連絡を推奨してください。
 `;

@@ -19,6 +19,9 @@ export interface CompanyInfo {
   address: string;
   founded: string;
   ceo: string;
+  phone: string;
+  email: string;
+  employees: string;
 }
 
 export interface NavItem {

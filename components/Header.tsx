@@ -24,12 +24,12 @@ const Header: React.FC = () => {
       <div className="flex justify-between items-center">
         {/* Logo */}
         <a href="#hero" className="font-display font-bold text-lg sm:text-xl text-white tracking-tight hover:text-acid transition-colors">
-          NOVASPHERE
+          T.SCREEN
         </a>
 
         {/* Time Display */}
         <div className="font-mono text-xs sm:text-sm text-white/60">
-          <span className="hidden sm:inline">Tokyo </span>
+          <span className="hidden sm:inline">Osaka </span>
           {formatTime(time)}
         </div>
       </div>
