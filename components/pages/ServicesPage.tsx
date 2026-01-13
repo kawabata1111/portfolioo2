@@ -1,9 +1,21 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { GraduationCap, Smartphone, ShoppingCart, CheckCircle, ArrowRight } from 'lucide-react';
 import PageHeader from '../PageHeader';
 import PageFooter from '../PageFooter';
 
 const ServicesPage: React.FC = () => {
+  useEffect(() => {
+    const hash = window.location.hash;
+    if (hash) {
+      const element = document.querySelector(hash);
+      if (element) {
+        setTimeout(() => {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }, 100);
+      }
+    }
+  }, []);
+
   return (
     <div className="bg-bg text-text min-h-screen">
       <div className="grain"></div>
