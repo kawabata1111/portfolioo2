@@ -41,7 +41,8 @@ const Contact: React.FC = () => {
           <div className="text-[15vw] sm:text-[12vw] font-display font-black leading-none opacity-10 select-none pointer-events-none overflow-hidden">
             T.SCREEN
           </div>
-          <div className="mt-4 sm:mt-0 sm:absolute sm:bottom-4 sm:right-0 text-xs sm:text-sm font-medium uppercase tracking-widest">
+          <div className="mt-4 sm:mt-0 sm:absolute sm:bottom-4 sm:right-0 flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-6 text-xs sm:text-sm font-medium uppercase tracking-widest">
+             <a href="/privacy.html" className="hover:opacity-60 transition-opacity">プライバシーポリシー</a>
              <span>© 2024 株式会社T.SCREEN</span>
           </div>
         </div>
