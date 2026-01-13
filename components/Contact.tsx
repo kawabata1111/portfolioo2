@@ -37,11 +37,11 @@ const Contact: React.FC = () => {
            </div>
         </div>
 
-        <div className="flex flex-col-reverse sm:flex-row justify-between items-start sm:items-end pt-8 sm:pt-12 border-t border-black/10 gap-4">
-          <div className="text-[12vw] sm:text-[10vw] font-display font-black leading-none opacity-10 select-none pointer-events-none">
+        <div className="relative pt-8 sm:pt-12 border-t border-black/10">
+          <div className="text-[15vw] sm:text-[12vw] font-display font-black leading-none opacity-10 select-none pointer-events-none overflow-hidden">
             T.SCREEN
           </div>
-          <div className="flex gap-4 sm:gap-6 md:gap-8 text-xs sm:text-sm font-medium uppercase tracking-widest pb-2 sm:pb-4">
+          <div className="mt-4 sm:mt-0 sm:absolute sm:bottom-4 sm:right-0 text-xs sm:text-sm font-medium uppercase tracking-widest">
              <span>© 2024 株式会社T.SCREEN</span>
           </div>
         </div>
