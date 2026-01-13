@@ -12,9 +12,9 @@ export const COMPANY_INFO: CompanyInfo = {
 };
 
 export const NAV_ITEMS: NavItem[] = [
-  { label: 'Home', href: '/' },
-  { label: 'Services', href: '/services' },
-  { label: 'Company', href: '/company' },
+  { label: 'Home', href: '/#hero' },
+  { label: 'Services', href: '/#services' },
+  { label: 'About', href: '/#about' },
   { label: 'News', href: '/#news' },
   { label: 'Contact', href: '/#contact' },
 ];
