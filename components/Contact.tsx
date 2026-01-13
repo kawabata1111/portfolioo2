@@ -8,7 +8,6 @@ const Contact: React.FC = () => {
       <div className="container mx-auto px-4 sm:px-6 md:px-12">
 
         <div className="mb-12 sm:mb-16 md:mb-24 text-center">
-          <p className="font-mono text-xs sm:text-sm tracking-widest uppercase mb-3 sm:mb-4 opacity-60">お気軽にご連絡ください</p>
           <h2 className="text-[12vw] sm:text-[10vw] leading-[0.8] font-display font-black tracking-tighter mb-8">
             CONTACT
           </h2>
