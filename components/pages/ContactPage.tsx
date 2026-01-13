@@ -1,9 +1,20 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import PageHeader from '../PageHeader';
 import PageFooter from '../PageFooter';
 import { COMPANY_INFO } from '../../constants';
 
 const ContactPage: React.FC = () => {
+  const [showSuccess, setShowSuccess] = useState(false);
+
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    if (params.get('success') === 'true') {
+      setShowSuccess(true);
+      // URLからパラメータを削除
+      window.history.replaceState({}, '', window.location.pathname);
+    }
+  }, []);
+
   return (
     <div className="bg-bg text-text min-h-screen">
       <div className="grain"></div>
@@ -21,6 +32,16 @@ const ContactPage: React.FC = () => {
               お問い合わせ・ご相談はお気軽にご連絡ください。
             </p>
           </div>
+
+          {/* Success Message */}
+          {showSuccess && (
+            <div className="mb-12 bg-acid/10 border border-acid p-6 rounded-sm">
+              <p className="text-acid font-bold text-lg mb-2">Message Sent!</p>
+              <p className="text-white/70">
+                お問い合わせありがとうございます。内容を確認の上、折り返しご連絡いたします。
+              </p>
+            </div>
+          )}
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
             {/* Contact Info */}
@@ -55,13 +76,25 @@ const ContactPage: React.FC = () => {
               <h2 className="text-2xl font-display font-bold text-white mb-8 uppercase tracking-wide">
                 Send a Message
               </h2>
-              <form className="space-y-6">
+              <form
+                action="https://formsubmit.co/t.screen0121@gmail.com"
+                method="POST"
+                className="space-y-6"
+              >
+                {/* FormSubmit Settings */}
+                <input type="hidden" name="_subject" value="【T.SCREEN】お問い合わせがありました" />
+                <input type="hidden" name="_next" value="https://kawabata1111.github.io/portfolioo2/contact.html?success=true" />
+                <input type="hidden" name="_captcha" value="false" />
+                <input type="hidden" name="_template" value="table" />
+
                 <div>
                   <label className="block font-mono text-xs text-acid uppercase tracking-wider mb-2">
                     Name
                   </label>
                   <input
                     type="text"
+                    name="name"
+                    required
                     className="w-full bg-surface border border-white/10 px-4 py-3 text-white placeholder-white/30 focus:border-acid focus:outline-none transition-colors"
                     placeholder="お名前"
                   />
@@ -72,6 +105,8 @@ const ContactPage: React.FC = () => {
                   </label>
                   <input
                     type="email"
+                    name="email"
+                    required
                     className="w-full bg-surface border border-white/10 px-4 py-3 text-white placeholder-white/30 focus:border-acid focus:outline-none transition-colors"
                     placeholder="メールアドレス"
                   />
@@ -82,6 +117,8 @@ const ContactPage: React.FC = () => {
                   </label>
                   <input
                     type="text"
+                    name="subject"
+                    required
                     className="w-full bg-surface border border-white/10 px-4 py-3 text-white placeholder-white/30 focus:border-acid focus:outline-none transition-colors"
                     placeholder="件名"
                   />
@@ -91,7 +128,9 @@ const ContactPage: React.FC = () => {
                     Message
                   </label>
                   <textarea
+                    name="message"
                     rows={6}
+                    required
                     className="w-full bg-surface border border-white/10 px-4 py-3 text-white placeholder-white/30 focus:border-acid focus:outline-none transition-colors resize-none"
                     placeholder="お問い合わせ内容"
                   />
@@ -103,9 +142,6 @@ const ContactPage: React.FC = () => {
                   Send Message
                 </button>
               </form>
-              <p className="mt-4 text-white/40 text-sm">
-                ※ このフォームはデモ用です。実際のお問い合わせはメールまたはお電話でお願いいたします。
-              </p>
             </div>
           </div>
         </div>
