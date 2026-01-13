@@ -9,8 +9,15 @@ const Contact: React.FC = () => {
 
         <div className="mb-12 sm:mb-16 md:mb-24">
           <p className="font-mono text-xs sm:text-sm tracking-widest uppercase mb-3 sm:mb-4 opacity-60">お気軽にご連絡ください</p>
-          <a href="mailto:t.screen0121@gmail.com" className="block text-[12vw] sm:text-[10vw] leading-[0.8] font-display font-black tracking-tighter hover:opacity-50 transition-opacity">
+          <h2 className="text-[12vw] sm:text-[10vw] leading-[0.8] font-display font-black tracking-tighter mb-8">
             CONTACT
+          </h2>
+          <a
+            href="/contact.html"
+            className="inline-flex items-center gap-3 bg-black text-acid px-8 py-4 font-mono text-sm font-bold uppercase tracking-widest hover:bg-black/80 transition-colors group"
+          >
+            Send a Message
+            <ArrowUpRight size={18} className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
           </a>
         </div>
 
