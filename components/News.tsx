@@ -13,7 +13,7 @@ const News: React.FC = () => {
               JOURNAL
             </h3>
           </div>
-          <a href="#" className="hidden sm:flex items-center gap-2 px-4 md:px-6 py-2 md:py-3 bg-white text-black hover:bg-acid transition-colors font-mono text-xs font-bold uppercase tracking-widest">
+          <a href="/news.html" className="hidden sm:flex items-center gap-2 px-4 md:px-6 py-2 md:py-3 bg-white text-black hover:bg-acid transition-colors font-mono text-xs font-bold uppercase tracking-widest">
             View All Archive
             <ArrowRight size={14} />
           </a>
@@ -49,7 +49,7 @@ const News: React.FC = () => {
         </div>
 
         <div className="mt-8 sm:mt-12 sm:hidden">
-           <a href="#" className="flex w-full items-center justify-center gap-2 px-6 py-4 border border-white/20 text-white hover:bg-white hover:text-black transition-colors font-mono text-xs font-bold uppercase tracking-widest">
+           <a href="/news.html" className="flex w-full items-center justify-center gap-2 px-6 py-4 border border-white/20 text-white hover:bg-white hover:text-black transition-colors font-mono text-xs font-bold uppercase tracking-widest">
              View All Archive
            </a>
         </div>
