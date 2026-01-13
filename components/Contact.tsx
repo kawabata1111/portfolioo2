@@ -42,7 +42,7 @@ const Contact: React.FC = () => {
             T.SCREEN
           </div>
           <div className="mt-4 sm:mt-0 sm:absolute sm:bottom-4 sm:right-0 flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-6 text-xs sm:text-sm font-medium uppercase tracking-widest">
-             <a href="/privacy.html" className="hover:opacity-60 transition-opacity">プライバシーポリシー</a>
+             <a href="/privacy.html" className="hover:opacity-60 transition-opacity">Privacy Policy</a>
              <span>© 2024 株式会社T.SCREEN</span>
           </div>
         </div>
