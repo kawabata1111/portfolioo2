@@ -14,7 +14,7 @@ const useScrollAnimation = () => {
           setIsVisible(true);
         }
       },
-      { threshold: 0.1 }
+      { threshold: 0.1, rootMargin: '-20% 0px -20% 0px' }
     );
 
     if (ref.current) {

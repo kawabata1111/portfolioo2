@@ -11,7 +11,7 @@ const PageFooter: React.FC = () => {
           setIsVisible(true);
         }
       },
-      { threshold: 0.1 }
+      { threshold: 0.1, rootMargin: '-10% 0px -10% 0px' }
     );
 
     if (footerRef.current) {
