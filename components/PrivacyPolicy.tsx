@@ -1,7 +1,62 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { ArrowLeft } from 'lucide-react';
 
 const PrivacyPolicy: React.FC = () => {
+  const [isLoaded, setIsLoaded] = useState(false);
+
+  useEffect(() => {
+    setTimeout(() => setIsLoaded(true), 100);
+  }, []);
+
+  const sections = [
+    {
+      title: '01. Introduction',
+      content: '株式会社T.SCREEN（以下「当社」といいます）は、お客様の個人情報の保護を重要な責務と認識し、以下のプライバシーポリシーに基づき、適切な取り扱いと保護に努めます。',
+    },
+    {
+      title: '02. Information We Collect',
+      content: '当社は、以下の情報を収集することがあります：',
+      list: [
+        '氏名、住所、電話番号、メールアドレス等の連絡先情報',
+        'お問い合わせ内容',
+        '当社サービスのご利用履歴',
+        'その他、当社サービスの提供に必要な情報',
+      ],
+    },
+    {
+      title: '03. Purpose of Use',
+      content: '収集した個人情報は、以下の目的で利用いたします：',
+      list: [
+        'お問い合わせへの対応',
+        '当社サービスの提供・運営',
+        'サービス向上のための分析',
+        '新サービスや重要なお知らせのご案内',
+        '法令に基づく対応',
+      ],
+    },
+    {
+      title: '04. Third Party Disclosure',
+      content: '当社は、法令に基づく場合を除き、お客様の同意なく個人情報を第三者に提供することはありません。ただし、以下の場合は例外とします：',
+      list: [
+        '法令に基づく開示請求があった場合',
+        '人の生命、身体または財産の保護のために必要な場合',
+        '公衆衛生の向上または児童の健全な育成の推進のために必要な場合',
+      ],
+    },
+    {
+      title: '05. Data Security',
+      content: '当社は、お客様の個人情報を適切に管理し、不正アクセス、紛失、破壊、改ざん、漏洩等を防止するため、必要かつ適切な安全管理措置を講じます。',
+    },
+    {
+      title: '06. Your Rights',
+      content: 'お客様は、ご自身の個人情報について、開示、訂正、削除を求めることができます。ご希望の場合は、下記のお問い合わせ先までご連絡ください。',
+    },
+    {
+      title: '07. Policy Updates',
+      content: '当社は、必要に応じて本プライバシーポリシーを変更することがあります。変更後のポリシーは、当ウェブサイトに掲載した時点で効力を生じるものとします。',
+    },
+  ];
+
   return (
     <div className="bg-bg text-text min-h-screen">
       <div className="grain"></div>
@@ -22,84 +77,49 @@ const PrivacyPolicy: React.FC = () => {
       {/* Content */}
       <main className="container mx-auto px-4 sm:px-6 md:px-12 pt-32 pb-16">
         <div className="max-w-3xl mx-auto">
-          <p className="text-acid font-mono text-xs tracking-widest uppercase mb-4">Legal</p>
-          <h1 className="text-4xl sm:text-5xl md:text-6xl font-display font-bold text-white mb-4 uppercase tracking-tight">
+          <p className={`text-acid font-mono text-xs tracking-widest uppercase mb-4 transition-all duration-700 ${
+            isLoaded ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-8'
+          }`}>Legal</p>
+          <h1 className={`text-4xl sm:text-5xl md:text-6xl font-display font-bold text-white mb-4 uppercase tracking-tight transition-all duration-1000 ${
+            isLoaded ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-full'
+          }`}>
             Privacy Policy
           </h1>
-          <p className="text-white/60 mb-12 font-mono text-sm uppercase tracking-wider">
+          <p className={`text-white/60 mb-12 font-mono text-sm uppercase tracking-wider transition-all duration-700 delay-200 ${
+            isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+          }`}>
             Last Updated: January 2024
           </p>
 
           <div className="space-y-12 text-white/80 leading-relaxed">
-            <section>
-              <h2 className="text-lg sm:text-xl font-display font-bold text-white mb-4 uppercase tracking-wide">01. Introduction</h2>
-              <p>
-                株式会社T.SCREEN（以下「当社」といいます）は、お客様の個人情報の保護を重要な責務と認識し、
-                以下のプライバシーポリシーに基づき、適切な取り扱いと保護に努めます。
-              </p>
-            </section>
+            {sections.map((section, index) => (
+              <section
+                key={index}
+                className={`transition-all duration-700 ease-out ${
+                  isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+                }`}
+                style={{ transitionDelay: `${index * 100 + 400}ms` }}
+              >
+                <h2 className="text-lg sm:text-xl font-display font-bold text-white mb-4 uppercase tracking-wide">
+                  {section.title}
+                </h2>
+                <p>{section.content}</p>
+                {section.list && (
+                  <ul className="list-none space-y-2 pl-4 border-l border-acid/50 mt-4">
+                    {section.list.map((item, i) => (
+                      <li key={i} className="pl-4">{item}</li>
+                    ))}
+                  </ul>
+                )}
+              </section>
+            ))}
 
-            <section>
-              <h2 className="text-lg sm:text-xl font-display font-bold text-white mb-4 uppercase tracking-wide">02. Information We Collect</h2>
-              <p className="mb-4">当社は、以下の情報を収集することがあります：</p>
-              <ul className="list-none space-y-2 pl-4 border-l border-acid/50">
-                <li className="pl-4">氏名、住所、電話番号、メールアドレス等の連絡先情報</li>
-                <li className="pl-4">お問い合わせ内容</li>
-                <li className="pl-4">当社サービスのご利用履歴</li>
-                <li className="pl-4">その他、当社サービスの提供に必要な情報</li>
-              </ul>
-            </section>
-
-            <section>
-              <h2 className="text-lg sm:text-xl font-display font-bold text-white mb-4 uppercase tracking-wide">03. Purpose of Use</h2>
-              <p className="mb-4">収集した個人情報は、以下の目的で利用いたします：</p>
-              <ul className="list-none space-y-2 pl-4 border-l border-acid/50">
-                <li className="pl-4">お問い合わせへの対応</li>
-                <li className="pl-4">当社サービスの提供・運営</li>
-                <li className="pl-4">サービス向上のための分析</li>
-                <li className="pl-4">新サービスや重要なお知らせのご案内</li>
-                <li className="pl-4">法令に基づく対応</li>
-              </ul>
-            </section>
-
-            <section>
-              <h2 className="text-lg sm:text-xl font-display font-bold text-white mb-4 uppercase tracking-wide">04. Third Party Disclosure</h2>
-              <p>
-                当社は、法令に基づく場合を除き、お客様の同意なく個人情報を第三者に提供することはありません。
-                ただし、以下の場合は例外とします：
-              </p>
-              <ul className="list-none space-y-2 pl-4 border-l border-acid/50 mt-4">
-                <li className="pl-4">法令に基づく開示請求があった場合</li>
-                <li className="pl-4">人の生命、身体または財産の保護のために必要な場合</li>
-                <li className="pl-4">公衆衛生の向上または児童の健全な育成の推進のために必要な場合</li>
-              </ul>
-            </section>
-
-            <section>
-              <h2 className="text-lg sm:text-xl font-display font-bold text-white mb-4 uppercase tracking-wide">05. Data Security</h2>
-              <p>
-                当社は、お客様の個人情報を適切に管理し、不正アクセス、紛失、破壊、改ざん、
-                漏洩等を防止するため、必要かつ適切な安全管理措置を講じます。
-              </p>
-            </section>
-
-            <section>
-              <h2 className="text-lg sm:text-xl font-display font-bold text-white mb-4 uppercase tracking-wide">06. Your Rights</h2>
-              <p>
-                お客様は、ご自身の個人情報について、開示、訂正、削除を求めることができます。
-                ご希望の場合は、下記のお問い合わせ先までご連絡ください。
-              </p>
-            </section>
-
-            <section>
-              <h2 className="text-lg sm:text-xl font-display font-bold text-white mb-4 uppercase tracking-wide">07. Policy Updates</h2>
-              <p>
-                当社は、必要に応じて本プライバシーポリシーを変更することがあります。
-                変更後のポリシーは、当ウェブサイトに掲載した時点で効力を生じるものとします。
-              </p>
-            </section>
-
-            <section>
+            <section
+              className={`transition-all duration-700 ease-out ${
+                isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+              }`}
+              style={{ transitionDelay: '1100ms' }}
+            >
               <h2 className="text-lg sm:text-xl font-display font-bold text-white mb-4 uppercase tracking-wide">08. Contact</h2>
               <p className="mb-6">
                 本ポリシーに関するお問い合わせは、下記までご連絡ください。

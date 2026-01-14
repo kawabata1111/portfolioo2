@@ -1,9 +1,39 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { CheckCircle, ArrowRight } from 'lucide-react';
 import PageHeader from '../PageHeader';
 import PageFooter from '../PageFooter';
 
+const useScrollAnimation = () => {
+  const ref = useRef<HTMLDivElement>(null);
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+        }
+      },
+      { threshold: 0.1 }
+    );
+
+    if (ref.current) {
+      observer.observe(ref.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
+
+  return { ref, isVisible };
+};
+
 const ServicesPage: React.FC = () => {
+  const [isLoaded, setIsLoaded] = useState(false);
+  const section1 = useScrollAnimation();
+  const section2 = useScrollAnimation();
+  const section3 = useScrollAnimation();
+  const ctaSection = useScrollAnimation();
+
   useEffect(() => {
     const hash = window.location.hash;
     if (hash) {
@@ -14,6 +44,7 @@ const ServicesPage: React.FC = () => {
         }, 100);
       }
     }
+    setTimeout(() => setIsLoaded(true), 100);
   }, []);
 
   return (
@@ -24,21 +55,29 @@ const ServicesPage: React.FC = () => {
       <main className="pt-32 pb-16">
         <div className="container mx-auto px-4 sm:px-6 md:px-12">
           {/* Hero Section */}
-          <div className="mb-16 sm:mb-24">
-            <p className="text-acid font-mono text-xs tracking-widest uppercase mb-4">What We Do</p>
-            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-display font-bold text-white uppercase tracking-tight mb-6">
+          <div className="mb-16 sm:mb-24 overflow-hidden">
+            <p className={`text-acid font-mono text-xs tracking-widest uppercase mb-4 transition-all duration-700 ${
+              isLoaded ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-8'
+            }`}>What We Do</p>
+            <h1 className={`text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-display font-bold text-white uppercase tracking-tight mb-6 transition-all duration-1000 ${
+              isLoaded ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-full'
+            }`}>
               Services
             </h1>
-            <p className="text-white/60 max-w-2xl text-lg leading-relaxed">
+            <p className={`text-white/60 max-w-2xl text-lg leading-relaxed transition-all duration-700 delay-300 ${
+              isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+            }`}>
               株式会社T.SCREENは、3つの事業を柱に多角的なビジネスを展開しています。
               それぞれの分野で培った専門知識とノウハウを活かし、お客様に最適なソリューションを提供します。
             </p>
           </div>
 
           {/* Service 01: 研修事業 */}
-          <section id="training" className="mb-24 sm:mb-32 scroll-mt-32">
+          <section id="training" className="mb-24 sm:mb-32 scroll-mt-32" ref={section1.ref}>
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-start">
-              <div>
+              <div className={`transition-all duration-1000 ease-out ${
+                section1.isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-full'
+              }`}>
                 <span className="font-display text-6xl sm:text-7xl md:text-8xl font-black text-acid/20 leading-none">01</span>
                 <h2 className="text-3xl sm:text-4xl font-display font-bold text-white uppercase tracking-tight mb-4 -mt-4">
                   Training Business
@@ -49,7 +88,9 @@ const ServicesPage: React.FC = () => {
                   実践的なカリキュラムと経験豊富な講師陣により、即戦力となる人材育成をサポートします。
                 </p>
               </div>
-              <div className="bg-surface border border-white/10 p-8 rounded-sm">
+              <div className={`bg-surface border border-white/10 p-8 rounded-sm transition-all duration-1000 delay-200 ease-out ${
+                section1.isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-full'
+              }`}>
                 <h3 className="text-lg font-display font-bold text-white uppercase tracking-wide mb-6">
                   Service Details
                 </h3>
@@ -62,7 +103,9 @@ const ServicesPage: React.FC = () => {
                     '新入社員研修',
                     'カスタマイズ研修プログラム',
                   ].map((item, index) => (
-                    <li key={index} className="flex items-start gap-3">
+                    <li key={index} className={`flex items-start gap-3 transition-all duration-500 ${
+                      section1.isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-8'
+                    }`} style={{ transitionDelay: `${index * 100 + 400}ms` }}>
                       <CheckCircle size={20} className="text-acid flex-shrink-0 mt-0.5" />
                       <span className="text-white/80">{item}</span>
                     </li>
@@ -76,7 +119,9 @@ const ServicesPage: React.FC = () => {
                 { label: 'Practical', desc: '実践重視のカリキュラム設計' },
                 { label: 'Support', desc: '研修後のフォローアップ体制' },
               ].map((item, index) => (
-                <div key={index} className="border-l-2 border-acid/50 pl-4">
+                <div key={index} className={`border-l-2 border-acid/50 pl-4 transition-all duration-700 ${
+                  section1.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+                }`} style={{ transitionDelay: `${index * 150 + 600}ms` }}>
                   <p className="font-mono text-xs text-acid uppercase tracking-wider mb-2">{item.label}</p>
                   <p className="text-white/60 text-sm">{item.desc}</p>
                 </div>
@@ -88,9 +133,11 @@ const ServicesPage: React.FC = () => {
           <div className="border-t border-white/10 mb-24 sm:mb-32"></div>
 
           {/* Service 02: スマホ関連グッズ卸売業 */}
-          <section id="wholesale" className="mb-24 sm:mb-32 scroll-mt-32">
+          <section id="wholesale" className="mb-24 sm:mb-32 scroll-mt-32" ref={section2.ref}>
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-start">
-              <div className="lg:order-2">
+              <div className={`lg:order-2 transition-all duration-1000 ease-out ${
+                section2.isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-full'
+              }`}>
                 <span className="font-display text-6xl sm:text-7xl md:text-8xl font-black text-acid/20 leading-none">02</span>
                 <h2 className="text-3xl sm:text-4xl font-display font-bold text-white uppercase tracking-tight mb-4 -mt-4">
                   Wholesale Business
@@ -101,7 +148,9 @@ const ServicesPage: React.FC = () => {
                   高品質な商品を競争力のある価格で提供し、小売店様・EC事業者様のビジネスをサポートします。
                 </p>
               </div>
-              <div className="bg-surface border border-white/10 p-8 rounded-sm lg:order-1">
+              <div className={`bg-surface border border-white/10 p-8 rounded-sm lg:order-1 transition-all duration-1000 delay-200 ease-out ${
+                section2.isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-full'
+              }`}>
                 <h3 className="text-lg font-display font-bold text-white uppercase tracking-wide mb-6">
                   Product Lineup
                 </h3>
@@ -114,7 +163,9 @@ const ServicesPage: React.FC = () => {
                     'スマホスタンド・車載ホルダー',
                     'その他スマホ周辺機器',
                   ].map((item, index) => (
-                    <li key={index} className="flex items-start gap-3">
+                    <li key={index} className={`flex items-start gap-3 transition-all duration-500 ${
+                      section2.isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-8'
+                    }`} style={{ transitionDelay: `${index * 100 + 400}ms` }}>
                       <CheckCircle size={20} className="text-acid flex-shrink-0 mt-0.5" />
                       <span className="text-white/80">{item}</span>
                     </li>
@@ -128,7 +179,9 @@ const ServicesPage: React.FC = () => {
                 { label: 'Price', desc: '競争力のある卸売価格を実現' },
                 { label: 'Delivery', desc: '迅速な配送体制で在庫リスクを軽減' },
               ].map((item, index) => (
-                <div key={index} className="border-l-2 border-acid/50 pl-4">
+                <div key={index} className={`border-l-2 border-acid/50 pl-4 transition-all duration-700 ${
+                  section2.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+                }`} style={{ transitionDelay: `${index * 150 + 600}ms` }}>
                   <p className="font-mono text-xs text-acid uppercase tracking-wider mb-2">{item.label}</p>
                   <p className="text-white/60 text-sm">{item.desc}</p>
                 </div>
@@ -140,9 +193,11 @@ const ServicesPage: React.FC = () => {
           <div className="border-t border-white/10 mb-24 sm:mb-32"></div>
 
           {/* Service 03: Amazon物販 */}
-          <section id="ecommerce" className="mb-24 sm:mb-32 scroll-mt-32">
+          <section id="ecommerce" className="mb-24 sm:mb-32 scroll-mt-32" ref={section3.ref}>
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-start">
-              <div>
+              <div className={`transition-all duration-1000 ease-out ${
+                section3.isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-full'
+              }`}>
                 <span className="font-display text-6xl sm:text-7xl md:text-8xl font-black text-acid/20 leading-none">03</span>
                 <h2 className="text-3xl sm:text-4xl font-display font-bold text-white uppercase tracking-tight mb-4 -mt-4">
                   E-Commerce
@@ -153,7 +208,9 @@ const ServicesPage: React.FC = () => {
                   市場分析に基づいた商品選定と効率的な運営により、安定した販売実績を実現しています。
                 </p>
               </div>
-              <div className="bg-surface border border-white/10 p-8 rounded-sm">
+              <div className={`bg-surface border border-white/10 p-8 rounded-sm transition-all duration-1000 delay-200 ease-out ${
+                section3.isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-full'
+              }`}>
                 <h3 className="text-lg font-display font-bold text-white uppercase tracking-wide mb-6">
                   Business Features
                 </h3>
@@ -166,7 +223,9 @@ const ServicesPage: React.FC = () => {
                     '継続的な商品ラインナップの拡充',
                     '季節・トレンドに応じた販売施策',
                   ].map((item, index) => (
-                    <li key={index} className="flex items-start gap-3">
+                    <li key={index} className={`flex items-start gap-3 transition-all duration-500 ${
+                      section3.isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-8'
+                    }`} style={{ transitionDelay: `${index * 100 + 400}ms` }}>
                       <CheckCircle size={20} className="text-acid flex-shrink-0 mt-0.5" />
                       <span className="text-white/80">{item}</span>
                     </li>
@@ -180,7 +239,9 @@ const ServicesPage: React.FC = () => {
                 { label: 'Efficiency', desc: 'FBAで配送・カスタマー対応を効率化' },
                 { label: 'Growth', desc: '継続的な売上拡大を目指す運営体制' },
               ].map((item, index) => (
-                <div key={index} className="border-l-2 border-acid/50 pl-4">
+                <div key={index} className={`border-l-2 border-acid/50 pl-4 transition-all duration-700 ${
+                  section3.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+                }`} style={{ transitionDelay: `${index * 150 + 600}ms` }}>
                   <p className="font-mono text-xs text-acid uppercase tracking-wider mb-2">{item.label}</p>
                   <p className="text-white/60 text-sm">{item.desc}</p>
                 </div>
@@ -189,7 +250,9 @@ const ServicesPage: React.FC = () => {
           </section>
 
           {/* CTA Section */}
-          <div className="bg-surface border border-white/10 p-8 sm:p-12 rounded-sm text-center">
+          <div ref={ctaSection.ref} className={`bg-surface border border-white/10 p-8 sm:p-12 rounded-sm text-center transition-all duration-1000 ease-out ${
+            ctaSection.isVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-90'
+          }`}>
             <h3 className="text-2xl sm:text-3xl font-display font-bold text-white uppercase tracking-tight mb-4">
               Get in Touch
             </h3>
