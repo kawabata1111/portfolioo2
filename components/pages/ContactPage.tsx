@@ -3,7 +3,8 @@ import PageHeader from '../PageHeader';
 import PageFooter from '../PageFooter';
 import { COMPANY_INFO } from '../../constants';
 
-const useScrollAnimation = () => {
+// 個別要素用のアニメーションフック
+const useElementAnimation = () => {
   const ref = useRef<HTMLDivElement>(null);
   const [isVisible, setIsVisible] = useState(false);
 
@@ -37,7 +38,14 @@ const useScrollAnimation = () => {
 const ContactPage: React.FC = () => {
   const [showSuccess, setShowSuccess] = useState(false);
   const [isLoaded, setIsLoaded] = useState(false);
-  const formSection = useScrollAnimation();
+
+  // 各パーツのアニメーション
+  const contactInfoTitle = useElementAnimation();
+  const contactEmail = useElementAnimation();
+  const contactPhone = useElementAnimation();
+  const contactAddress = useElementAnimation();
+  const formTitle = useElementAnimation();
+  const formFields = useElementAnimation();
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
@@ -47,6 +55,12 @@ const ContactPage: React.FC = () => {
     }
     setTimeout(() => setIsLoaded(true), 100);
   }, []);
+
+  const contactItems = [
+    { label: 'Email', value: COMPANY_INFO.email, href: `mailto:${COMPANY_INFO.email}`, anim: contactEmail },
+    { label: 'Phone', value: COMPANY_INFO.phone, href: `tel:${COMPANY_INFO.phone}`, anim: contactPhone },
+    { label: 'Address', value: COMPANY_INFO.address, anim: contactAddress },
+  ];
 
   return (
     <div className="bg-bg text-text min-h-screen">
@@ -82,23 +96,28 @@ const ContactPage: React.FC = () => {
             </div>
           )}
 
-          <div ref={formSection.ref} className="grid grid-cols-1 lg:grid-cols-2 gap-16">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
             {/* Contact Info */}
-            <div className={`transition-all duration-1000 ease-out ${
-              formSection.isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-full'
-            }`}>
-              <h2 className="text-2xl font-display font-bold text-white mb-8 uppercase tracking-wide">
-                Contact Information
-              </h2>
+            <div>
+              <div
+                ref={contactInfoTitle.ref}
+                className={`transition-all duration-1000 ease-out ${
+                  contactInfoTitle.isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-full'
+                }`}
+              >
+                <h2 className="text-2xl font-display font-bold text-white mb-8 uppercase tracking-wide">
+                  Contact Information
+                </h2>
+              </div>
               <div className="space-y-8">
-                {[
-                  { label: 'Email', value: COMPANY_INFO.email, href: `mailto:${COMPANY_INFO.email}` },
-                  { label: 'Phone', value: COMPANY_INFO.phone, href: `tel:${COMPANY_INFO.phone}` },
-                  { label: 'Address', value: COMPANY_INFO.address },
-                ].map((item, index) => (
-                  <div key={index} className={`bg-surface border border-white/10 p-6 rounded-sm transition-all duration-700 ${
-                    formSection.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-                  }`} style={{ transitionDelay: `${index * 150 + 200}ms` }}>
+                {contactItems.map((item, index) => (
+                  <div
+                    key={index}
+                    ref={item.anim.ref}
+                    className={`bg-surface border border-white/10 p-6 rounded-sm transition-all duration-700 ${
+                      item.anim.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+                    }`}
+                  >
                     <span className="block font-mono text-xs text-acid uppercase tracking-wider mb-2">{item.label}</span>
                     {item.href ? (
                       <a href={item.href} className="text-white text-xl hover:text-acid transition-colors">
@@ -113,67 +132,79 @@ const ContactPage: React.FC = () => {
             </div>
 
             {/* Contact Form */}
-            <div className={`transition-all duration-1000 delay-200 ease-out ${
-              formSection.isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-full'
-            }`}>
-              <h2 className="text-2xl font-display font-bold text-white mb-8 uppercase tracking-wide">
-                Send a Message
-              </h2>
-              <form
-                action="https://formsubmit.co/t.screen0121@gmail.com"
-                method="POST"
-                className="space-y-6"
+            <div>
+              <div
+                ref={formTitle.ref}
+                className={`transition-all duration-1000 ease-out ${
+                  formTitle.isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-full'
+                }`}
               >
-                {/* FormSubmit Settings */}
-                <input type="hidden" name="_subject" value="【T.SCREEN】お問い合わせがありました" />
-                <input type="hidden" name="_next" value="https://kawabata1111.github.io/portfolioo2/contact.html?success=true" />
-                <input type="hidden" name="_captcha" value="false" />
-                <input type="hidden" name="_template" value="table" />
+                <h2 className="text-2xl font-display font-bold text-white mb-8 uppercase tracking-wide">
+                  Send a Message
+                </h2>
+              </div>
+              <div
+                ref={formFields.ref}
+                className={`transition-all duration-1000 ease-out ${
+                  formFields.isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-full'
+                }`}
+              >
+                <form
+                  action="https://formsubmit.co/t.screen0121@gmail.com"
+                  method="POST"
+                  className="space-y-6"
+                >
+                  {/* FormSubmit Settings */}
+                  <input type="hidden" name="_subject" value="【T.SCREEN】お問い合わせがありました" />
+                  <input type="hidden" name="_next" value="https://kawabata1111.github.io/portfolioo2/contact.html?success=true" />
+                  <input type="hidden" name="_captcha" value="false" />
+                  <input type="hidden" name="_template" value="table" />
 
-                {[
-                  { label: 'Name', type: 'text', name: 'name', placeholder: 'お名前' },
-                  { label: 'Email', type: 'email', name: 'email', placeholder: 'メールアドレス' },
-                  { label: 'Subject', type: 'text', name: 'subject', placeholder: '件名' },
-                ].map((field, index) => (
-                  <div key={index} className={`transition-all duration-500 ${
-                    formSection.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-                  }`} style={{ transitionDelay: `${index * 100 + 400}ms` }}>
+                  {[
+                    { label: 'Name', type: 'text', name: 'name', placeholder: 'お名前' },
+                    { label: 'Email', type: 'email', name: 'email', placeholder: 'メールアドレス' },
+                    { label: 'Subject', type: 'text', name: 'subject', placeholder: '件名' },
+                  ].map((field, index) => (
+                    <div key={index} className={`transition-all duration-500 ${
+                      formFields.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+                    }`} style={{ transitionDelay: `${index * 100}ms` }}>
+                      <label className="block font-mono text-xs text-acid uppercase tracking-wider mb-2">
+                        {field.label}
+                      </label>
+                      <input
+                        type={field.type}
+                        name={field.name}
+                        required
+                        className="w-full bg-surface border border-white/10 px-4 py-3 text-white placeholder-white/30 focus:border-acid focus:outline-none transition-colors"
+                        placeholder={field.placeholder}
+                      />
+                    </div>
+                  ))}
+                  <div className={`transition-all duration-500 ${
+                    formFields.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+                  }`} style={{ transitionDelay: '300ms' }}>
                     <label className="block font-mono text-xs text-acid uppercase tracking-wider mb-2">
-                      {field.label}
+                      Message
                     </label>
-                    <input
-                      type={field.type}
-                      name={field.name}
+                    <textarea
+                      name="message"
+                      rows={6}
                       required
-                      className="w-full bg-surface border border-white/10 px-4 py-3 text-white placeholder-white/30 focus:border-acid focus:outline-none transition-colors"
-                      placeholder={field.placeholder}
+                      className="w-full bg-surface border border-white/10 px-4 py-3 text-white placeholder-white/30 focus:border-acid focus:outline-none transition-colors resize-none"
+                      placeholder="お問い合わせ内容"
                     />
                   </div>
-                ))}
-                <div className={`transition-all duration-500 ${
-                  formSection.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-                }`} style={{ transitionDelay: '700ms' }}>
-                  <label className="block font-mono text-xs text-acid uppercase tracking-wider mb-2">
-                    Message
-                  </label>
-                  <textarea
-                    name="message"
-                    rows={6}
-                    required
-                    className="w-full bg-surface border border-white/10 px-4 py-3 text-white placeholder-white/30 focus:border-acid focus:outline-none transition-colors resize-none"
-                    placeholder="お問い合わせ内容"
-                  />
-                </div>
-                <button
-                  type="submit"
-                  className={`w-full bg-acid text-black py-4 font-mono text-sm font-bold uppercase tracking-widest hover:bg-white transition-all duration-500 ${
-                    formSection.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-                  }`}
-                  style={{ transitionDelay: '800ms' }}
-                >
-                  Send Message
-                </button>
-              </form>
+                  <button
+                    type="submit"
+                    className={`w-full bg-acid text-black py-4 font-mono text-sm font-bold uppercase tracking-widest hover:bg-white transition-all duration-500 ${
+                      formFields.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+                    }`}
+                    style={{ transitionDelay: '400ms' }}
+                  >
+                    Send Message
+                  </button>
+                </form>
+              </div>
             </div>
           </div>
         </div>

@@ -3,7 +3,8 @@ import PageHeader from '../PageHeader';
 import PageFooter from '../PageFooter';
 import { COMPANY_INFO } from '../../constants';
 
-const useScrollAnimation = () => {
+// 個別要素用のアニメーションフック
+const useElementAnimation = () => {
   const ref = useRef<HTMLDivElement>(null);
   const [isVisible, setIsVisible] = useState(false);
 
@@ -36,8 +37,16 @@ const useScrollAnimation = () => {
 
 const AboutPage: React.FC = () => {
   const [isLoaded, setIsLoaded] = useState(false);
-  const visionSection = useScrollAnimation();
-  const profileSection = useScrollAnimation();
+
+  // Vision セクションのパーツ
+  const visionTitle = useElementAnimation();
+  const visionDesc = useElementAnimation();
+  const visionNumbers = useElementAnimation();
+
+  // Profile セクションのパーツ
+  const profileTitle = useElementAnimation();
+  const profileLeft = useElementAnimation();
+  const profileRight = useElementAnimation();
 
   useEffect(() => {
     setTimeout(() => setIsLoaded(true), 100);
@@ -68,31 +77,40 @@ const AboutPage: React.FC = () => {
           </div>
 
           {/* Company Vision */}
-          <div ref={visionSection.ref} className="grid grid-cols-1 lg:grid-cols-2 gap-16 mb-24">
-            <div className={`transition-all duration-1000 ease-out ${
-              visionSection.isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-full'
-            }`}>
-              <h2 className="text-2xl sm:text-3xl font-display font-bold text-white mb-6 uppercase tracking-wide">
-                Our Vision
-              </h2>
-              <div className="space-y-6 text-white/70 leading-relaxed">
-                <p className={`transition-all duration-700 ${
-                  visionSection.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-                }`} style={{ transitionDelay: '200ms' }}>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 mb-24">
+            <div>
+              <div
+                ref={visionTitle.ref}
+                className={`transition-all duration-1000 ease-out ${
+                  visionTitle.isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-full'
+                }`}
+              >
+                <h2 className="text-2xl sm:text-3xl font-display font-bold text-white mb-6 uppercase tracking-wide">
+                  Our Vision
+                </h2>
+              </div>
+              <div
+                ref={visionDesc.ref}
+                className={`space-y-6 text-white/70 leading-relaxed transition-all duration-1000 ease-out ${
+                  visionDesc.isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-1/2'
+                }`}
+              >
+                <p>
                   株式会社T.SCREENは、令和5年6月に大阪で設立されました。
                   研修事業、スマホ関連グッズ卸売業、Amazon物販の3つの事業を柱に、幅広いビジネスを展開しています。
                 </p>
-                <p className={`transition-all duration-700 ${
-                  visionSection.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-                }`} style={{ transitionDelay: '400ms' }}>
+                <p>
                   お客様のニーズに寄り添い、質の高いサービスと商品を提供することで、
                   信頼されるビジネスパートナーとして成長し続けることを目指しています。
                 </p>
               </div>
             </div>
-            <div className={`bg-surface border border-white/10 p-8 rounded-sm transition-all duration-1000 delay-200 ease-out ${
-              visionSection.isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-full'
-            }`}>
+            <div
+              ref={visionNumbers.ref}
+              className={`bg-surface border border-white/10 p-8 rounded-sm transition-all duration-1000 ease-out ${
+                visionNumbers.isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-full'
+              }`}
+            >
               <h3 className="text-lg font-display font-bold text-white mb-6 uppercase tracking-wide">Key Numbers</h3>
               <div className="space-y-6">
                 {[
@@ -101,8 +119,8 @@ const AboutPage: React.FC = () => {
                   { label: 'Location', value: 'Osaka', isText: true },
                 ].map((item, index) => (
                   <div key={index} className={`flex justify-between items-end border-b border-white/10 pb-4 transition-all duration-500 ${
-                    visionSection.isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-8'
-                  }`} style={{ transitionDelay: `${index * 150 + 400}ms` }}>
+                    visionNumbers.isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-8'
+                  }`} style={{ transitionDelay: `${index * 150 + 200}ms` }}>
                     <span className="font-mono text-xs text-acid uppercase tracking-wider">{item.label}</span>
                     <span className={`${item.isText ? 'text-xl' : 'text-3xl'} font-display font-bold text-white`}>{item.value}</span>
                   </div>
@@ -112,36 +130,47 @@ const AboutPage: React.FC = () => {
           </div>
 
           {/* Company Info */}
-          <div ref={profileSection.ref} className={`bg-surface border border-white/10 p-8 sm:p-12 rounded-sm transition-all duration-1000 ease-out ${
-            profileSection.isVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-95'
-          }`}>
-            <h2 className="text-2xl sm:text-3xl font-display font-bold text-white mb-8 uppercase tracking-wide">
-              Company Profile
-            </h2>
+          <div className="bg-surface border border-white/10 p-8 sm:p-12 rounded-sm">
+            <div
+              ref={profileTitle.ref}
+              className={`transition-all duration-1000 ease-out ${
+                profileTitle.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-8'
+              }`}
+            >
+              <h2 className="text-2xl sm:text-3xl font-display font-bold text-white mb-8 uppercase tracking-wide">
+                Company Profile
+              </h2>
+            </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              <div className="space-y-6">
+              <div
+                ref={profileLeft.ref}
+                className="space-y-6"
+              >
                 {[
                   { label: 'Company Name', value: COMPANY_INFO.name },
                   { label: 'Representative', value: COMPANY_INFO.ceo },
                   { label: 'Established', value: COMPANY_INFO.founded },
                 ].map((item, index) => (
                   <div key={index} className={`transition-all duration-700 ${
-                    profileSection.isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-8'
-                  }`} style={{ transitionDelay: `${index * 100 + 300}ms` }}>
+                    profileLeft.isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-8'
+                  }`} style={{ transitionDelay: `${index * 100}ms` }}>
                     <span className="block font-mono text-xs text-acid uppercase tracking-wider mb-2">{item.label}</span>
                     <span className="text-white text-lg">{item.value}</span>
                   </div>
                 ))}
               </div>
-              <div className="space-y-6">
+              <div
+                ref={profileRight.ref}
+                className="space-y-6"
+              >
                 {[
                   { label: 'Address', value: COMPANY_INFO.address },
                   { label: 'Phone', value: COMPANY_INFO.phone },
                   { label: 'Email', value: COMPANY_INFO.email },
                 ].map((item, index) => (
                   <div key={index} className={`transition-all duration-700 ${
-                    profileSection.isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-8'
-                  }`} style={{ transitionDelay: `${index * 100 + 300}ms` }}>
+                    profileRight.isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-8'
+                  }`} style={{ transitionDelay: `${index * 100}ms` }}>
                     <span className="block font-mono text-xs text-acid uppercase tracking-wider mb-2">{item.label}</span>
                     <span className="text-white text-lg">{item.value}</span>
                   </div>

@@ -1,10 +1,48 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import PageHeader from '../PageHeader';
 import PageFooter from '../PageFooter';
 import { NEWS } from '../../constants';
 
+// 個別要素用のアニメーションフック
+const useElementAnimation = () => {
+  const ref = useRef<HTMLDivElement>(null);
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    const element = ref.current;
+    if (!element) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0 }
+    );
+
+    const timer = setTimeout(() => {
+      observer.observe(element);
+    }, 100);
+
+    return () => {
+      clearTimeout(timer);
+      observer.disconnect();
+    };
+  }, []);
+
+  return { ref, isVisible };
+};
+
 const NewsPage: React.FC = () => {
   const [isLoaded, setIsLoaded] = useState(false);
+
+  // 各ニュースアイテムのアニメーション
+  const news1 = useElementAnimation();
+  const news2 = useElementAnimation();
+  const news3 = useElementAnimation();
+  const newsAnims = [news1, news2, news3];
 
   useEffect(() => {
     setTimeout(() => setIsLoaded(true), 100);
@@ -36,28 +74,31 @@ const NewsPage: React.FC = () => {
 
           {/* News List */}
           <div className="space-y-6">
-            {NEWS.map((item, index) => (
-              <article
-                key={item.id}
-                className={`group bg-surface border border-white/10 p-6 sm:p-8 rounded-sm hover:border-acid/50 transition-all duration-700 ease-out ${
-                  isLoaded ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-full'
-                }`}
-                style={{ transitionDelay: `${index * 150 + 400}ms` }}
-              >
-                <div className="flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-8">
-                  <div className="flex items-center gap-4">
-                    <span className="font-mono text-xs text-white/30">0{index + 1}</span>
-                    <span className="font-mono text-sm text-white/60">{item.date}</span>
-                    <span className="px-3 py-1 bg-acid/10 text-acid font-mono text-xs uppercase tracking-wider">
-                      {item.category}
-                    </span>
-                  </div>
-                  <h3 className="text-lg sm:text-xl font-bold text-white group-hover:text-acid transition-colors flex-1">
-                    {item.title}
-                  </h3>
+            {NEWS.map((item, index) => {
+              const anim = newsAnims[index];
+              return (
+                <div key={item.id} ref={anim?.ref}>
+                  <article
+                    className={`group bg-surface border border-white/10 p-6 sm:p-8 rounded-sm hover:border-acid/50 transition-all duration-700 ease-out ${
+                      anim?.isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-full'
+                    }`}
+                  >
+                    <div className="flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-8">
+                      <div className="flex items-center gap-4">
+                        <span className="font-mono text-xs text-white/30">0{index + 1}</span>
+                        <span className="font-mono text-sm text-white/60">{item.date}</span>
+                        <span className="px-3 py-1 bg-acid/10 text-acid font-mono text-xs uppercase tracking-wider">
+                          {item.category}
+                        </span>
+                      </div>
+                      <h3 className="text-lg sm:text-xl font-bold text-white group-hover:text-acid transition-colors flex-1">
+                        {item.title}
+                      </h3>
+                    </div>
+                  </article>
                 </div>
-              </article>
-            ))}
+              );
+            })}
           </div>
 
           {/* Empty State (if no news) */}
