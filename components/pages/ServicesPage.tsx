@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { GraduationCap, Smartphone, ShoppingCart, CheckCircle, ArrowRight } from 'lucide-react';
+import { CheckCircle, ArrowRight } from 'lucide-react';
 import PageHeader from '../PageHeader';
 import PageFooter from '../PageFooter';
 
@@ -39,16 +39,11 @@ const ServicesPage: React.FC = () => {
           <section id="training" className="mb-24 sm:mb-32 scroll-mt-32">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-start">
               <div>
-                <div className="flex items-center gap-4 mb-6">
-                  <div className="w-14 h-14 flex items-center justify-center bg-acid text-black rounded-sm">
-                    <GraduationCap size={28} />
-                  </div>
-                  <span className="font-mono text-sm text-acid">01</span>
-                </div>
-                <h2 className="text-3xl sm:text-4xl font-display font-bold text-white uppercase tracking-tight mb-6">
+                <span className="font-display text-6xl sm:text-7xl md:text-8xl font-black text-acid/20 leading-none">01</span>
+                <h2 className="text-3xl sm:text-4xl font-display font-bold text-white uppercase tracking-tight mb-4 -mt-4">
                   Training Business
                 </h2>
-                <p className="text-2xl text-white/80 font-light mb-6">研修事業</p>
+                <p className="text-xl text-acid font-medium mb-6">研修事業</p>
                 <p className="text-white/60 leading-relaxed mb-8">
                   ビジネスパーソンのスキルアップを支援する各種研修プログラムを提供しています。
                   実践的なカリキュラムと経験豊富な講師陣により、即戦力となる人材育成をサポートします。
@@ -96,16 +91,11 @@ const ServicesPage: React.FC = () => {
           <section id="wholesale" className="mb-24 sm:mb-32 scroll-mt-32">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-start">
               <div className="lg:order-2">
-                <div className="flex items-center gap-4 mb-6">
-                  <div className="w-14 h-14 flex items-center justify-center bg-acid text-black rounded-sm">
-                    <Smartphone size={28} />
-                  </div>
-                  <span className="font-mono text-sm text-acid">02</span>
-                </div>
-                <h2 className="text-3xl sm:text-4xl font-display font-bold text-white uppercase tracking-tight mb-6">
+                <span className="font-display text-6xl sm:text-7xl md:text-8xl font-black text-acid/20 leading-none">02</span>
+                <h2 className="text-3xl sm:text-4xl font-display font-bold text-white uppercase tracking-tight mb-4 -mt-4">
                   Wholesale Business
                 </h2>
-                <p className="text-2xl text-white/80 font-light mb-6">スマホ関連グッズ卸売業</p>
+                <p className="text-xl text-acid font-medium mb-6">スマホ関連グッズ卸売業</p>
                 <p className="text-white/60 leading-relaxed mb-8">
                   スマートフォン関連アクセサリーの卸売事業を展開。
                   高品質な商品を競争力のある価格で提供し、小売店様・EC事業者様のビジネスをサポートします。
@@ -153,16 +143,11 @@ const ServicesPage: React.FC = () => {
           <section id="ecommerce" className="mb-24 sm:mb-32 scroll-mt-32">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-start">
               <div>
-                <div className="flex items-center gap-4 mb-6">
-                  <div className="w-14 h-14 flex items-center justify-center bg-acid text-black rounded-sm">
-                    <ShoppingCart size={28} />
-                  </div>
-                  <span className="font-mono text-sm text-acid">03</span>
-                </div>
-                <h2 className="text-3xl sm:text-4xl font-display font-bold text-white uppercase tracking-tight mb-6">
+                <span className="font-display text-6xl sm:text-7xl md:text-8xl font-black text-acid/20 leading-none">03</span>
+                <h2 className="text-3xl sm:text-4xl font-display font-bold text-white uppercase tracking-tight mb-4 -mt-4">
                   E-Commerce
                 </h2>
-                <p className="text-2xl text-white/80 font-light mb-6">Amazon物販</p>
+                <p className="text-xl text-acid font-medium mb-6">Amazon物販</p>
                 <p className="text-white/60 leading-relaxed mb-8">
                   Amazonマーケットプレイスを活用した物販事業を展開しています。
                   市場分析に基づいた商品選定と効率的な運営により、安定した販売実績を実現しています。
