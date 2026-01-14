@@ -9,6 +9,24 @@ import Contact from './components/Contact';
 function App() {
   const [cursorPos, setCursorPos] = useState({ x: 0, y: 0 });
   const [isHovering, setIsHovering] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+  const [loadingProgress, setLoadingProgress] = useState(0);
+
+  useEffect(() => {
+    // Loading animation
+    const interval = setInterval(() => {
+      setLoadingProgress(prev => {
+        if (prev >= 100) {
+          clearInterval(interval);
+          setTimeout(() => setIsLoading(false), 500);
+          return 100;
+        }
+        return prev + Math.random() * 15;
+      });
+    }, 100);
+
+    return () => clearInterval(interval);
+  }, []);
 
   useEffect(() => {
     const moveCursor = (e: MouseEvent) => {
@@ -35,8 +53,44 @@ function App() {
     };
   }, []);
 
+  // Loading Screen
+  if (isLoading) {
+    return (
+      <div className="fixed inset-0 bg-bg flex flex-col items-center justify-center z-[200]">
+        <div className="grain"></div>
+
+        {/* Logo */}
+        <div className="mb-12">
+          <span className="font-display text-4xl sm:text-5xl font-bold text-white tracking-tight">
+            T.SCREEN
+          </span>
+        </div>
+
+        {/* Progress Bar */}
+        <div className="w-48 sm:w-64 h-[2px] bg-white/10 relative overflow-hidden">
+          <div
+            className="absolute top-0 left-0 h-full bg-acid transition-all duration-100 ease-out"
+            style={{ width: `${Math.min(loadingProgress, 100)}%` }}
+          />
+        </div>
+
+        {/* Progress Number */}
+        <div className="mt-4 font-mono text-xs text-white/50">
+          {Math.min(Math.floor(loadingProgress), 100)}%
+        </div>
+
+        <style>{`
+          @keyframes pulse {
+            0%, 100% { opacity: 0.5; }
+            50% { opacity: 1; }
+          }
+        `}</style>
+      </div>
+    );
+  }
+
   return (
-    <div className="bg-bg text-text min-h-screen relative selection:bg-acid selection:text-black">
+    <div className="bg-bg text-text min-h-screen relative selection:bg-acid selection:text-black animate-[fadeIn_0.5s_ease-out]">
       <div className="grain"></div>
 
       <div
@@ -60,6 +114,13 @@ function App() {
         <News />
         <Contact />
       </main>
+
+      <style>{`
+        @keyframes fadeIn {
+          from { opacity: 0; }
+          to { opacity: 1; }
+        }
+      `}</style>
     </div>
   );
 }
