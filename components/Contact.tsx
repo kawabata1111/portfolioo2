@@ -27,28 +27,18 @@ const Contact: React.FC = () => {
     <section ref={sectionRef} id="contact" className="bg-acid text-black pt-16 sm:pt-24 md:pt-32 pb-8 sm:pb-12 relative overflow-hidden">
       <div className="container mx-auto px-4 sm:px-6 md:px-12">
 
-        <div className={`mb-12 sm:mb-16 md:mb-24 text-center transition-all duration-1000 ease-out ${
-          isVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-50'
-        }`}>
-          <h2 className="text-[12vw] sm:text-[10vw] leading-[0.8] font-display font-black tracking-tighter mb-8 overflow-hidden">
-            {'CONTACT'.split('').map((char, i) => (
-              <span
-                key={i}
-                className={`inline-block transition-all duration-500 ${
-                  isVisible ? 'opacity-100 translate-y-0 rotate-0' : 'opacity-0 translate-y-full rotate-12'
-                }`}
-                style={{ transitionDelay: `${i * 50 + 200}ms` }}
-              >
-                {char}
-              </span>
-            ))}
+        <div className="mb-12 sm:mb-16 md:mb-24 text-center">
+          <h2 className={`text-[12vw] sm:text-[10vw] leading-[0.8] font-display font-black tracking-tighter mb-8 transition-all duration-1000 ease-out ${
+            isVisible ? 'opacity-100 scale-100 translate-y-0' : 'opacity-0 scale-50 translate-y-12'
+          }`}>
+            CONTACT
           </h2>
           <a
             href="/contact.html"
             className={`inline-flex items-center gap-3 bg-black text-acid px-8 py-4 font-mono text-sm font-bold uppercase tracking-widest hover:bg-black/80 transition-all group duration-700 ${
               isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
             }`}
-            style={{ transitionDelay: '600ms' }}
+            style={{ transitionDelay: '400ms' }}
           >
             Send a Message
             <ArrowUpRight size={18} className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
