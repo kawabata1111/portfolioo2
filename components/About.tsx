@@ -35,8 +35,8 @@ const About: React.FC = () => {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-24">
 
           {/* Left Column: Vision */}
-          <div className={`lg:col-span-7 pt-8 md:pt-12 transition-all duration-700 ${
-            isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+          <div className={`lg:col-span-7 pt-8 md:pt-12 transition-all duration-1000 ease-out ${
+            isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-full'
           }`}>
             <div className="flex items-start gap-3 sm:gap-4 mb-8 sm:mb-12">
                <span className="w-px h-16 sm:h-20 bg-acid block flex-shrink-0"></span>
@@ -49,8 +49,8 @@ const About: React.FC = () => {
                </div>
             </div>
 
-            <div className={`space-y-6 sm:space-y-8 text-white/70 leading-relaxed sm:leading-loose text-sm sm:text-base md:text-lg font-light transition-all duration-700 delay-150 ${
-              isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+            <div className={`space-y-6 sm:space-y-8 text-white/70 leading-relaxed sm:leading-loose text-sm sm:text-base md:text-lg font-light transition-all duration-1000 delay-300 ease-out ${
+              isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-1/2'
             }`}>
               <p>
                 株式会社T.SCREENは、令和5年6月に大阪で設立されました。
@@ -62,8 +62,8 @@ const About: React.FC = () => {
               </p>
             </div>
 
-            <div className={`mt-10 sm:mt-16 grayscale hover:grayscale-0 transition-all duration-1000 delay-300 ${
-              isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+            <div className={`mt-10 sm:mt-16 grayscale hover:grayscale-0 transition-all duration-1000 delay-500 ease-out ${
+              isVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-90'
             }`}>
                <img
                    src="https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=2069&auto=format&fit=crop"
@@ -74,8 +74,8 @@ const About: React.FC = () => {
           </div>
 
           {/* Right Column: Data & Vertical Text */}
-          <div className={`lg:col-span-5 flex flex-col justify-between transition-all duration-700 delay-200 ${
-            isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+          <div className={`lg:col-span-5 flex flex-col justify-between transition-all duration-1000 delay-300 ease-out ${
+            isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-full'
           }`}>
 
             {/* Vertical Text Accent - Desktop only */}

@@ -27,25 +27,38 @@ const Contact: React.FC = () => {
     <section ref={sectionRef} id="contact" className="bg-acid text-black pt-16 sm:pt-24 md:pt-32 pb-8 sm:pb-12 relative overflow-hidden">
       <div className="container mx-auto px-4 sm:px-6 md:px-12">
 
-        <div className={`mb-12 sm:mb-16 md:mb-24 text-center transition-all duration-700 ${
-          isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+        <div className={`mb-12 sm:mb-16 md:mb-24 text-center transition-all duration-1000 ease-out ${
+          isVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-50'
         }`}>
-          <h2 className="text-[12vw] sm:text-[10vw] leading-[0.8] font-display font-black tracking-tighter mb-8">
-            CONTACT
+          <h2 className="text-[12vw] sm:text-[10vw] leading-[0.8] font-display font-black tracking-tighter mb-8 overflow-hidden">
+            {'CONTACT'.split('').map((char, i) => (
+              <span
+                key={i}
+                className={`inline-block transition-all duration-500 ${
+                  isVisible ? 'opacity-100 translate-y-0 rotate-0' : 'opacity-0 translate-y-full rotate-12'
+                }`}
+                style={{ transitionDelay: `${i * 50 + 200}ms` }}
+              >
+                {char}
+              </span>
+            ))}
           </h2>
           <a
             href="/contact.html"
-            className="inline-flex items-center gap-3 bg-black text-acid px-8 py-4 font-mono text-sm font-bold uppercase tracking-widest hover:bg-black/80 transition-colors group"
+            className={`inline-flex items-center gap-3 bg-black text-acid px-8 py-4 font-mono text-sm font-bold uppercase tracking-widest hover:bg-black/80 transition-all group duration-700 ${
+              isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+            }`}
+            style={{ transitionDelay: '600ms' }}
           >
             Send a Message
             <ArrowUpRight size={18} className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
           </a>
         </div>
 
-        <div className={`grid grid-cols-1 md:grid-cols-2 gap-10 sm:gap-12 md:gap-16 mb-12 sm:mb-16 md:mb-24 border-t border-black/10 pt-8 sm:pt-12 transition-all duration-700 delay-150 ${
-          isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-        }`}>
-           <div>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 sm:gap-12 md:gap-16 mb-12 sm:mb-16 md:mb-24 border-t border-black/10 pt-8 sm:pt-12">
+           <div className={`transition-all duration-1000 ease-out ${
+             isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-full'
+           }`} style={{ transitionDelay: '400ms' }}>
              <h4 className="font-display font-bold text-xl sm:text-2xl mb-4 sm:mb-8">CONTACT</h4>
              <p className="text-base sm:text-lg md:text-xl font-medium border-b border-black/20 pb-1 inline-block mb-3 sm:mb-4">{COMPANY_INFO.email}</p>
              <p className="text-base sm:text-lg font-medium mb-2">TEL: {COMPANY_INFO.phone}</p>
@@ -54,7 +67,9 @@ const Contact: React.FC = () => {
              </p>
            </div>
 
-           <div>
+           <div className={`transition-all duration-1000 ease-out ${
+             isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-full'
+           }`} style={{ transitionDelay: '500ms' }}>
               <h4 className="font-display font-bold text-xl sm:text-2xl mb-4 sm:mb-8">SOCIAL</h4>
               <div className="flex flex-row md:flex-col gap-4 sm:gap-6 md:gap-4 items-start flex-wrap">
                  {['Twitter', 'LinkedIn', 'Instagram'].map(social => (
@@ -67,10 +82,12 @@ const Contact: React.FC = () => {
            </div>
         </div>
 
-        <div className={`relative pt-8 sm:pt-12 border-t border-black/10 transition-all duration-700 delay-300 ${
-          isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-        }`}>
-          <div className="text-[15vw] sm:text-[12vw] font-display font-black leading-none opacity-10 select-none pointer-events-none overflow-hidden">
+        <div className={`relative pt-8 sm:pt-12 border-t border-black/10 transition-all duration-1000 ease-out ${
+          isVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-75'
+        }`} style={{ transitionDelay: '700ms' }}>
+          <div className={`text-[15vw] sm:text-[12vw] font-display font-black leading-none opacity-10 select-none pointer-events-none overflow-hidden transition-all duration-1000 ${
+            isVisible ? 'translate-x-0' : '-translate-x-full'
+          }`} style={{ transitionDelay: '800ms' }}>
             T.SCREEN
           </div>
           <div className="mt-4 sm:mt-0 sm:absolute sm:bottom-4 sm:right-0 flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-6 text-xs sm:text-sm font-medium uppercase tracking-widest">

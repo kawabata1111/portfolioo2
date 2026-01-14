@@ -26,8 +26,8 @@ const News: React.FC = () => {
   return (
     <section ref={sectionRef} id="news" className="py-16 sm:py-24 md:py-32 bg-bg relative z-10">
       <div className="container mx-auto px-4 sm:px-6 md:px-12">
-        <div className={`flex flex-col sm:flex-row sm:items-end justify-between mb-12 sm:mb-16 md:mb-20 border-b border-white/10 pb-4 sm:pb-6 gap-4 transition-all duration-700 ${
-          isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+        <div className={`flex flex-col sm:flex-row sm:items-end justify-between mb-12 sm:mb-16 md:mb-20 border-b border-white/10 pb-4 sm:pb-6 gap-4 transition-all duration-1000 ease-out ${
+          isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-full'
         }`}>
           <div>
             <span className="text-acid font-mono text-xs tracking-widest uppercase mb-2 block">Updates</span>
@@ -35,7 +35,9 @@ const News: React.FC = () => {
               JOURNAL
             </h3>
           </div>
-          <a href="/news.html" className="hidden sm:flex items-center gap-2 px-4 md:px-6 py-2 md:py-3 bg-white text-black hover:bg-acid transition-colors font-mono text-xs font-bold uppercase tracking-widest">
+          <a href="/news.html" className={`hidden sm:flex items-center gap-2 px-4 md:px-6 py-2 md:py-3 bg-white text-black hover:bg-acid transition-all font-mono text-xs font-bold uppercase tracking-widest duration-700 delay-500 ${
+            isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-8'
+          }`}>
             View All Archive
             <ArrowRight size={14} />
           </a>
@@ -46,10 +48,10 @@ const News: React.FC = () => {
             <a
               key={item.id}
               href="#"
-              className={`group flex flex-col md:flex-row md:items-baseline gap-4 sm:gap-6 md:gap-16 py-6 sm:py-8 md:py-12 border-b border-white/10 hover:border-acid/50 transition-all duration-500 ${
-                isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+              className={`group flex flex-col md:flex-row md:items-baseline gap-4 sm:gap-6 md:gap-16 py-6 sm:py-8 md:py-12 border-b border-white/10 hover:border-acid/50 transition-all duration-700 ease-out ${
+                isVisible ? 'opacity-100 translate-x-0 rotate-0' : 'opacity-0 translate-x-full rotate-3'
               }`}
-              style={{ transitionDelay: isVisible ? `${(index + 1) * 100}ms` : '0ms' }}
+              style={{ transitionDelay: isVisible ? `${(index + 1) * 150 + 300}ms` : '0ms' }}
             >
                <div className="flex flex-row md:flex-col gap-3 sm:gap-4 md:w-48 flex-shrink-0">
                   <span className="font-mono text-xs sm:text-sm text-white/50 group-hover:text-acid transition-colors">

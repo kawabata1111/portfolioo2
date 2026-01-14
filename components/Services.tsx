@@ -37,13 +37,15 @@ const Services: React.FC = () => {
     <section ref={sectionRef} id="services" className="py-16 sm:py-24 md:py-32 bg-bg relative z-20">
       <div className="container mx-auto px-4 sm:px-6 md:px-12">
 
-        <div className={`mb-12 sm:mb-16 md:mb-24 flex flex-col sm:flex-row sm:items-end justify-between border-b border-white/10 pb-4 gap-4 transition-all duration-700 ${
-          isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+        <div className={`mb-12 sm:mb-16 md:mb-24 flex flex-col sm:flex-row sm:items-end justify-between border-b border-white/10 pb-4 gap-4 transition-all duration-1000 ${
+          isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-full'
         }`}>
           <h2 className="text-3xl sm:text-5xl md:text-7xl lg:text-8xl font-display font-black text-white uppercase tracking-tighter">
             Capabilities
           </h2>
-          <span className="font-mono text-acid text-xs sm:text-sm">
+          <span className={`font-mono text-acid text-xs sm:text-sm transition-all duration-700 delay-300 ${
+            isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-8'
+          }`}>
             [ SERVICE_INDEX_01-03 ]
           </span>
         </div>
@@ -53,10 +55,10 @@ const Services: React.FC = () => {
             <a
               key={service.id}
               href={getServiceLink(service.id)}
-              className={`group relative border-b border-white/10 last:border-b-0 transition-all duration-500 block cursor-pointer ${
-                isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+              className={`group relative border-b border-white/10 last:border-b-0 transition-all duration-700 ease-out block cursor-pointer ${
+                isVisible ? 'opacity-100 translate-x-0 rotate-0' : 'opacity-0 -translate-x-full -rotate-3'
               }`}
-              style={{ transitionDelay: isVisible ? `${(index + 1) * 150}ms` : '0ms' }}
+              style={{ transitionDelay: isVisible ? `${(index + 1) * 200 + 300}ms` : '0ms' }}
               onMouseEnter={() => setActiveId(service.id)}
               onMouseLeave={() => setActiveId(null)}
             >

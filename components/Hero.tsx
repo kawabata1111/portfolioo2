@@ -1,7 +1,14 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 const Hero: React.FC = () => {
   const containerRef = useRef<HTMLDivElement>(null);
+  const [isLoaded, setIsLoaded] = useState(false);
+
+  useEffect(() => {
+    // Trigger animations after component mounts
+    const timer = setTimeout(() => setIsLoaded(true), 100);
+    return () => clearTimeout(timer);
+  }, []);
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
@@ -59,12 +66,38 @@ const Hero: React.FC = () => {
 
              <div className="relative text-center md:text-left">
                 <h1 className="text-4xl sm:text-5xl md:text-7xl lg:text-[9vw] leading-[0.85] font-display font-black tracking-tighter text-white uppercase mix-blend-difference z-20">
-                  <span className="block hover:text-acid transition-colors duration-500 cursor-default">T.SCREEN</span>
-                  <span className="block ml-4 sm:ml-8 md:ml-20 lg:ml-32 hover:text-acid transition-colors duration-500 cursor-default">Solutions</span>
+                  <span className="block hover:text-acid transition-colors duration-500 cursor-default overflow-hidden">
+                    {'T.SCREEN'.split('').map((char, i) => (
+                      <span
+                        key={i}
+                        className={`inline-block transition-all duration-500 ${
+                          isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-full'
+                        }`}
+                        style={{ transitionDelay: `${i * 80}ms` }}
+                      >
+                        {char}
+                      </span>
+                    ))}
+                  </span>
+                  <span className="block ml-4 sm:ml-8 md:ml-20 lg:ml-32 hover:text-acid transition-colors duration-500 cursor-default overflow-hidden">
+                    {'Solutions'.split('').map((char, i) => (
+                      <span
+                        key={i}
+                        className={`inline-block transition-all duration-500 ${
+                          isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-full'
+                        }`}
+                        style={{ transitionDelay: `${(i + 8) * 80}ms` }}
+                      >
+                        {char}
+                      </span>
+                    ))}
+                  </span>
                 </h1>
 
                 {/* Mobile Japanese Text */}
-                <p className="lg:hidden mt-6 md:mt-8 text-base sm:text-lg font-serif text-white/90 leading-loose">
+                <p className={`lg:hidden mt-6 md:mt-8 text-base sm:text-lg font-serif text-white/90 leading-loose transition-all duration-700 ${
+                  isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+                }`} style={{ transitionDelay: '1.5s' }}>
                   多角的な事業で、<br/>
                   <span className="text-acid">「価値」</span>を創造する。
                 </p>
