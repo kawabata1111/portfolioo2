@@ -1,8 +1,28 @@
-import React from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 
 const About: React.FC = () => {
+  const [isVisible, setIsVisible] = useState(false);
+  const sectionRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+        }
+      },
+      { threshold: 0.1 }
+    );
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
+
   return (
-    <section id="about" className="py-16 sm:py-24 md:py-32 bg-surface text-white relative border-t border-white/5">
+    <section ref={sectionRef} id="about" className="py-16 sm:py-24 md:py-32 bg-surface text-white relative border-t border-white/5">
 
       {/* Background Typography */}
       <div className="absolute top-0 left-0 w-full overflow-hidden pointer-events-none opacity-5">
@@ -15,7 +35,9 @@ const About: React.FC = () => {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-24">
 
           {/* Left Column: Vision */}
-          <div className="lg:col-span-7 pt-8 md:pt-12">
+          <div className={`lg:col-span-7 pt-8 md:pt-12 transition-all duration-700 ${
+            isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+          }`}>
             <div className="flex items-start gap-3 sm:gap-4 mb-8 sm:mb-12">
                <span className="w-px h-16 sm:h-20 bg-acid block flex-shrink-0"></span>
                <div>
@@ -27,7 +49,9 @@ const About: React.FC = () => {
                </div>
             </div>
 
-            <div className="space-y-6 sm:space-y-8 text-white/70 leading-relaxed sm:leading-loose text-sm sm:text-base md:text-lg font-light">
+            <div className={`space-y-6 sm:space-y-8 text-white/70 leading-relaxed sm:leading-loose text-sm sm:text-base md:text-lg font-light transition-all duration-700 delay-150 ${
+              isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+            }`}>
               <p>
                 株式会社T.SCREENは、令和5年6月に大阪で設立されました。
                 研修事業、スマホ関連グッズ卸売業、Amazon物販の3つの事業を柱に、幅広いビジネスを展開しています。
@@ -38,7 +62,9 @@ const About: React.FC = () => {
               </p>
             </div>
 
-            <div className="mt-10 sm:mt-16 grayscale hover:grayscale-0 transition-all duration-1000">
+            <div className={`mt-10 sm:mt-16 grayscale hover:grayscale-0 transition-all duration-1000 delay-300 ${
+              isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+            }`}>
                <img
                    src="https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=2069&auto=format&fit=crop"
                    alt="Office Environment"
@@ -48,7 +74,9 @@ const About: React.FC = () => {
           </div>
 
           {/* Right Column: Data & Vertical Text */}
-          <div className="lg:col-span-5 flex flex-col justify-between">
+          <div className={`lg:col-span-5 flex flex-col justify-between transition-all duration-700 delay-200 ${
+            isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+          }`}>
 
             {/* Vertical Text Accent - Desktop only */}
             <div className="hidden lg:flex justify-end mb-24">

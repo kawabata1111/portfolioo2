@@ -1,12 +1,34 @@
-import React from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { ArrowRight } from 'lucide-react';
 import { NEWS } from '../constants';
 
 const News: React.FC = () => {
+  const [isVisible, setIsVisible] = useState(false);
+  const sectionRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+        }
+      },
+      { threshold: 0.1 }
+    );
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
+
   return (
-    <section id="news" className="py-16 sm:py-24 md:py-32 bg-bg relative z-10">
+    <section ref={sectionRef} id="news" className="py-16 sm:py-24 md:py-32 bg-bg relative z-10">
       <div className="container mx-auto px-4 sm:px-6 md:px-12">
-        <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-12 sm:mb-16 md:mb-20 border-b border-white/10 pb-4 sm:pb-6 gap-4">
+        <div className={`flex flex-col sm:flex-row sm:items-end justify-between mb-12 sm:mb-16 md:mb-20 border-b border-white/10 pb-4 sm:pb-6 gap-4 transition-all duration-700 ${
+          isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+        }`}>
           <div>
             <span className="text-acid font-mono text-xs tracking-widest uppercase mb-2 block">Updates</span>
             <h3 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-display font-black text-white tracking-tighter">
@@ -20,11 +42,14 @@ const News: React.FC = () => {
         </div>
 
         <div className="grid grid-cols-1">
-          {NEWS.map((item) => (
+          {NEWS.map((item, index) => (
             <a
               key={item.id}
               href="#"
-              className="group flex flex-col md:flex-row md:items-baseline gap-4 sm:gap-6 md:gap-16 py-6 sm:py-8 md:py-12 border-b border-white/10 hover:border-acid/50 transition-colors duration-300"
+              className={`group flex flex-col md:flex-row md:items-baseline gap-4 sm:gap-6 md:gap-16 py-6 sm:py-8 md:py-12 border-b border-white/10 hover:border-acid/50 transition-all duration-500 ${
+                isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+              }`}
+              style={{ transitionDelay: isVisible ? `${(index + 1) * 100}ms` : '0ms' }}
             >
                <div className="flex flex-row md:flex-col gap-3 sm:gap-4 md:w-48 flex-shrink-0">
                   <span className="font-mono text-xs sm:text-sm text-white/50 group-hover:text-acid transition-colors">

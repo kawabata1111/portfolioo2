@@ -1,13 +1,35 @@
-import React from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { ArrowUpRight } from 'lucide-react';
 import { COMPANY_INFO } from '../constants';
 
 const Contact: React.FC = () => {
+  const [isVisible, setIsVisible] = useState(false);
+  const sectionRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+        }
+      },
+      { threshold: 0.1 }
+    );
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
+
   return (
-    <section id="contact" className="bg-acid text-black pt-16 sm:pt-24 md:pt-32 pb-8 sm:pb-12 relative overflow-hidden">
+    <section ref={sectionRef} id="contact" className="bg-acid text-black pt-16 sm:pt-24 md:pt-32 pb-8 sm:pb-12 relative overflow-hidden">
       <div className="container mx-auto px-4 sm:px-6 md:px-12">
 
-        <div className="mb-12 sm:mb-16 md:mb-24 text-center">
+        <div className={`mb-12 sm:mb-16 md:mb-24 text-center transition-all duration-700 ${
+          isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+        }`}>
           <h2 className="text-[12vw] sm:text-[10vw] leading-[0.8] font-display font-black tracking-tighter mb-8">
             CONTACT
           </h2>
@@ -20,7 +42,9 @@ const Contact: React.FC = () => {
           </a>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 sm:gap-12 md:gap-16 mb-12 sm:mb-16 md:mb-24 border-t border-black/10 pt-8 sm:pt-12">
+        <div className={`grid grid-cols-1 md:grid-cols-2 gap-10 sm:gap-12 md:gap-16 mb-12 sm:mb-16 md:mb-24 border-t border-black/10 pt-8 sm:pt-12 transition-all duration-700 delay-150 ${
+          isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+        }`}>
            <div>
              <h4 className="font-display font-bold text-xl sm:text-2xl mb-4 sm:mb-8">CONTACT</h4>
              <p className="text-base sm:text-lg md:text-xl font-medium border-b border-black/20 pb-1 inline-block mb-3 sm:mb-4">{COMPANY_INFO.email}</p>
@@ -43,7 +67,9 @@ const Contact: React.FC = () => {
            </div>
         </div>
 
-        <div className="relative pt-8 sm:pt-12 border-t border-black/10">
+        <div className={`relative pt-8 sm:pt-12 border-t border-black/10 transition-all duration-700 delay-300 ${
+          isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+        }`}>
           <div className="text-[15vw] sm:text-[12vw] font-display font-black leading-none opacity-10 select-none pointer-events-none overflow-hidden">
             T.SCREEN
           </div>
