@@ -94,13 +94,13 @@ function App() {
       <div className="grain"></div>
 
       <div
-        className="fixed top-0 left-0 w-3 h-3 bg-acid rounded-full pointer-events-none z-[100] mix-blend-exclusion transition-transform duration-150 ease-out will-change-transform"
+        className="hidden md:block fixed top-0 left-0 w-3 h-3 bg-acid rounded-full pointer-events-none z-[100] mix-blend-exclusion transition-transform duration-150 ease-out will-change-transform"
         style={{
           transform: `translate(${cursorPos.x - 6}px, ${cursorPos.y - 6}px) scale(${isHovering ? 5 : 1})`,
         }}
       />
       <div
-         className="fixed top-0 left-0 w-10 h-10 border border-white/30 rounded-full pointer-events-none z-[99] transition-transform duration-300 ease-out will-change-transform"
+         className="hidden md:block fixed top-0 left-0 w-10 h-10 border border-white/30 rounded-full pointer-events-none z-[99] transition-transform duration-300 ease-out will-change-transform"
          style={{
           transform: `translate(${cursorPos.x - 20}px, ${cursorPos.y - 20}px) scale(${isHovering ? 1.5 : 1})`,
         }}
