@@ -5,18 +5,27 @@ const PageFooter: React.FC = () => {
   const footerRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
+    const element = footerRef.current;
+    if (!element) return;
+
+    // 既に画面内にある場合は即座に表示
+    const rect = element.getBoundingClientRect();
+    if (rect.top < window.innerHeight && rect.bottom > 0) {
+      setIsVisible(true);
+      return;
+    }
+
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
           setIsVisible(true);
+          observer.disconnect();
         }
       },
-      { threshold: 0.1, rootMargin: '-10% 0px -10% 0px' }
+      { threshold: 0.1, rootMargin: '-30px 0px -30px 0px' }
     );
 
-    if (footerRef.current) {
-      observer.observe(footerRef.current);
-    }
+    observer.observe(element);
 
     return () => observer.disconnect();
   }, []);
