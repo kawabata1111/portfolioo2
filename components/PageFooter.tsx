@@ -8,13 +8,6 @@ const PageFooter: React.FC = () => {
     const element = footerRef.current;
     if (!element) return;
 
-    // 既に画面内にある場合は即座に表示
-    const rect = element.getBoundingClientRect();
-    if (rect.top < window.innerHeight && rect.bottom > 0) {
-      setIsVisible(true);
-      return;
-    }
-
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
@@ -22,12 +15,17 @@ const PageFooter: React.FC = () => {
           observer.disconnect();
         }
       },
-      { threshold: 0.1, rootMargin: '-30px 0px -30px 0px' }
+      { threshold: 0 }
     );
 
-    observer.observe(element);
+    const timer = setTimeout(() => {
+      observer.observe(element);
+    }, 100);
 
-    return () => observer.disconnect();
+    return () => {
+      clearTimeout(timer);
+      observer.disconnect();
+    };
   }, []);
 
   return (
