@@ -5,11 +5,13 @@ import { NAV_ITEMS } from '../constants';
 const PageHeader: React.FC = () => {
   const [time, setTime] = useState(new Date());
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
     const timer = setInterval(() => {
       setTime(new Date());
     }, 1000);
+    setTimeout(() => setIsLoaded(true), 100);
     return () => clearInterval(timer);
   }, []);
 
@@ -25,29 +27,41 @@ const PageHeader: React.FC = () => {
   return (
     <header className="fixed top-0 left-0 right-0 z-50 px-4 sm:px-6 md:px-8 py-4 sm:py-6 bg-bg/80 backdrop-blur-md">
       <div className="flex justify-between items-center">
-        <a href="/" className="font-display font-bold text-lg sm:text-xl text-white tracking-tight hover:text-acid transition-colors">
+        <a
+          href="/"
+          className={`font-display font-bold text-lg sm:text-xl text-white tracking-tight hover:text-acid transition-all duration-700 ${
+            isLoaded ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-8'
+          }`}
+        >
           T.SCREEN
         </a>
 
         <nav className="hidden md:flex items-center gap-8">
-          {NAV_ITEMS.map((item) => (
+          {NAV_ITEMS.map((item, index) => (
             <a
               key={item.label}
               href={item.href}
-              className="font-mono text-sm text-white/70 hover:text-acid transition-colors uppercase tracking-wider"
+              className={`font-mono text-sm text-white/70 hover:text-acid transition-all duration-500 uppercase tracking-wider ${
+                isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-4'
+              }`}
+              style={{ transitionDelay: `${index * 100 + 200}ms` }}
             >
               {item.label}
             </a>
           ))}
         </nav>
 
-        <div className="hidden md:block font-mono text-xs sm:text-sm text-white/60">
+        <div className={`hidden md:block font-mono text-xs sm:text-sm text-white/60 transition-all duration-700 ${
+          isLoaded ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-8'
+        }`} style={{ transitionDelay: '600ms' }}>
           <span>Osaka </span>
           {formatTime(time)}
         </div>
 
         <button
-          className="md:hidden text-white hover:text-acid transition-colors"
+          className={`md:hidden text-white hover:text-acid transition-all duration-500 ${
+            isLoaded ? 'opacity-100 scale-100' : 'opacity-0 scale-75'
+          }`}
           onClick={() => setIsMenuOpen(!isMenuOpen)}
           aria-label="Toggle menu"
         >
@@ -55,25 +69,30 @@ const PageHeader: React.FC = () => {
         </button>
       </div>
 
-      {isMenuOpen && (
-        <nav className="md:hidden mt-4 py-4 border-t border-white/10">
-          <div className="flex flex-col gap-4">
-            {NAV_ITEMS.map((item) => (
-              <a
-                key={item.label}
-                href={item.href}
-                className="font-mono text-sm text-white/70 hover:text-acid transition-colors uppercase tracking-wider"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                {item.label}
-              </a>
-            ))}
-          </div>
-          <div className="mt-4 pt-4 border-t border-white/10 font-mono text-xs text-white/60">
-            Osaka {formatTime(time)}
-          </div>
-        </nav>
-      )}
+      <nav className={`md:hidden overflow-hidden transition-all duration-500 ease-out ${
+        isMenuOpen ? 'max-h-96 opacity-100 mt-4 py-4' : 'max-h-0 opacity-0'
+      }`}>
+        <div className="flex flex-col gap-4 border-t border-white/10 pt-4">
+          {NAV_ITEMS.map((item, index) => (
+            <a
+              key={item.label}
+              href={item.href}
+              className={`font-mono text-sm text-white/70 hover:text-acid transition-all duration-300 uppercase tracking-wider ${
+                isMenuOpen ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-4'
+              }`}
+              style={{ transitionDelay: isMenuOpen ? `${index * 50}ms` : '0ms' }}
+              onClick={() => setIsMenuOpen(false)}
+            >
+              {item.label}
+            </a>
+          ))}
+        </div>
+        <div className={`mt-4 pt-4 border-t border-white/10 font-mono text-xs text-white/60 transition-all duration-300 ${
+          isMenuOpen ? 'opacity-100' : 'opacity-0'
+        }`} style={{ transitionDelay: isMenuOpen ? '250ms' : '0ms' }}>
+          Osaka {formatTime(time)}
+        </div>
+      </nav>
     </header>
   );
 };
